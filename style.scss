@@ -13,14 +13,37 @@
 /* BASE RULES */
 /**************/
 
+* {
+    margin: 0;
+}
+
 html {
   font-size: 100%;
+  height: 100%;
 }
 
 body {
 	background: $white;
   font: 18px/1.4 $helvetica;
   color: $darkGray;
+  height: 100%;
+}
+
+/* using Ryan Fait's sticky footer to stick the footer at the bottom of the page or content, whichever is lower */
+
+.sticky-footer-wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -89px; /* the bottom margin is the negative value of the footer's height */
+}
+
+.sticky-footer-footer, .sticky-footer-push {
+    height: 89px; /* .push must be the same height as .footer */
+}
+
+#main {
+	margin-bottom: 50px;
 }
 
 .container {
@@ -117,17 +140,8 @@ img {
 
 .date {
   font-style: italic;
-  color: $gray;
-}
-
-// Specify the color of the selection
-::-moz-selection {
-  color: $black;
-  background: $lightGray;
-}
-::selection {
-  color: $black;
-  background: $lightGray;
+  color: $gray;  
+  margin-top: -15px;
 }
 
 // Nicolas Gallagher's micro clearfix hack
@@ -272,7 +286,6 @@ nav {
 }
 
 .wrapper-footer {
-  margin-top: 50px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   background-color: $lightGray;

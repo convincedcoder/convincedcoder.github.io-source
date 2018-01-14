@@ -1,10 +1,35 @@
 ---
 layout: post
 title: You're up and running!
+tags: jekyll code
 ---
 
-Next you can update your site name, avatar and other options using the _config.yml file in the root of your repository (shown below).
+This tests the syntax highlighting:
 
-![_config.yml]({{ site.baseurl }}/images/config.png)
+```java
+public class Point {
+    private final int x;
+    private final int y;
 
-The easiest way to make your first post is to edit this one. Go into /_posts/ and update the Hello World markdown file. For more instructions head over to the [Jekyll Now repository](https://github.com/barryclark/jekyll-now) on GitHub.
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Point))
+            return false;
+        Point p = (Point) o;
+        return p.x == x && p.y == y;
+    }
+
+    // See Item 9
+    @Override
+    public int hashCode() {
+        return 31 * x + y;
+    }
+}
+```
+
+Test
