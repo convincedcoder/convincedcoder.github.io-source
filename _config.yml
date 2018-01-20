@@ -6,10 +6,10 @@
 name: The Human Microphone
 
 # Short bio or description (displayed in the header)
-description: Development blog with a focus on Java and Javascript
+description: Software development blog with a focus on Java and Javascript
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: /images/clipartsign_microphone_clip_art_11472.png
+avatar: /images/microphone.png
 
 #
 # Flags below are optional
@@ -78,6 +78,7 @@ sass:
 plugins:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
+  - jekyll-tagging # https://github.com/pattex/jekyll-tagging
 
 # Exclude these files from your production _site
 exclude:
@@ -86,3 +87,7 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+
+tag_page_layout: tag_page
+tag_page_dir: tag
+tag_permalink_style: pretty

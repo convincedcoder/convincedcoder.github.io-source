@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-This blog will cover a wide variety of development topics, with a focus on Java and Javascript.
+This blog will cover a wide variety of software development topics, with a focus on Java and Javascript.

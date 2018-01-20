@@ -140,8 +140,11 @@ img {
 
 .date {
   font-style: italic;
-  color: $gray;  
-  margin-top: -15px;
+  color: $gray;
+}
+
+div.date {
+  margin-top: -20px;
 }
 
 // Nicolas Gallagher's micro clearfix hack
@@ -294,6 +297,38 @@ nav {
 footer {
   padding: 20px 0;
   text-align: center;
+}
+
+.base-text-color {
+  color: $darkerGray;
+}
+
+%tag-shared {
+  background-color: $gray;
+  padding: .2em .6em .3em;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  white-space: nowrap;
+  border-radius: .25em;
+  vertical-align: baseline;
+}
+
+.tag {
+  @extend %tag-shared;
+  font-size: 75%;
+}
+
+a.tag {
+  color: #fff;
+}
+
+@for $i from 1 through 5 {
+  #tag-cloud .set-#{$i} {
+    @extend %tag-shared;
+    font-size: 100%;
+    display: inline-block;
+  }
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
