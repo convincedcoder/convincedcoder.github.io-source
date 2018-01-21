@@ -36,7 +36,7 @@ If you want to define equality in such a way that two objects can be considered 
 
 ## Introducing the `Point` class
 
-The `Point` class is the class we will be using as an example throughout this post. It is a simple class representing a point on a two-dimensional grid by means of an x coordinate and a y coordinate. We want to consider two `Point` objects to be equal if and only if they have the same x coordinate and the same y coordinate. Therefore, we will attempt to write an equals method that accomplishes this.
+The `Point` class is the class we will be using as an example throughout this post. It is a simple class representing a point on a two-dimensional grid by means of an x coordinate and a y coordinate. 
 
 ```java
 public class Point {
@@ -51,6 +51,8 @@ public class Point {
     // getters and setters for x and y here
 }
 ```
+
+We want to consider two `Point` objects to be equal if and only if they have the same x coordinate and the same y coordinate. Therefore, we will attempt to write an equals method that accomplishes this.
 
 ## The journey to a "perfect" `equals` method
 
