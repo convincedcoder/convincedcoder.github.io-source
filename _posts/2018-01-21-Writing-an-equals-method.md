@@ -6,8 +6,6 @@ tags: java
 
 If you've ever had to write or test an `equals` method, you may have gotten a feel for how complex this can get. This post will explain a number of things that can go wrong, offer solutions, and explain how a library called [EqualsVerifier](http://jqno.nl/equalsverifier/) can help you prevent unexpected behavior regarding object equality testing.
 
-> Note: this post is heavily based on the material offered by Jan Ouwens, the creator of the EqualsVerifier library.
-
 ## Why override the default `equals` method anyway?
 
 By default, every Java object has an `equals(Object o)` method which is inherited from the `Object` class. The implementation of this `equals` method compares objects using their memory locations, meaning that two objects are only considered equal if they actually point to the exact same memory location and are thus really one and the same object.
@@ -31,7 +29,7 @@ If you want to define equality in such a way that two objects can be considered 
 - Reflexivity: every object is equal to itself
 - Symmetry: if a is equal to b, then b is also equal to a
 - Transitivity: if a is equal to b and b is equal to c, then a is also equal to c
-- Consistency: if a is equal to b right now, then a is always equal to b
+- Consistency: if a is equal to b right now, then a is always equal to b as long as none of their state that is used in the `equals` method has been modified
 - Non-nullity: a actual object is never equal to `null`
 
 ## Introducing the `Point` class
@@ -62,7 +60,7 @@ Well, our class is simple, so let's write a simple `equals` method. We add this 
 
 ```java
 public boolean equals(Point other) {
-    return this.x == other.x && this.y == other.y;
+    return (this.x == other.x && this.y == other.y);
 }
 ```
 
@@ -80,7 +78,25 @@ public void test() {
 }
 ```
 
-What happened? Well, the `contains` method takes an `Object` as its argument, which means that `point2` is passed as `Object`. Because our defined `equals` method takes a `Point` as parameter, it actually doesn't override the default `equals(Object o)` method defined for the `Object` class. This means that, when the `contains` method checks for equality, the default `equals(Object o)` method is called. That method tells us that `point1` and `point2` are not equal because they do not point to the exact same memory location.
+What happened? Even though the `List` internally calls `equals` to check equality, it somehow doesn't consider `point1` and `point2` to be equal. 
+
+One important thing to note is that the `contains` method takes an `Object` as its argument, which means that `point2` is passed as an `Object`. The following test shows that our current `equals` method doesn't handle this very well.
+
+```java
+@Test
+public void test() {
+    Point point1 = new Point(1, 1);
+    Object pointObject = new Point(1, 1);
+                
+    assertTrue(point1.equals(pointObject)); // this fails
+    assertTrue(pointObject.equals(point1)); // also fails
+}
+```
+
+- The first assertion fails because our `Point` class does not define an `equals` method that takes an `Object` as its parameter. This means that the `equals` method being called is actually the `equals(Object o)` method that our class inherits from the `Object` class.
+- The second assertion fails because Object only has an `equals` method taking an `Object` as parameter and we don't override that method in our `Point` class.  This means that the `equals` method being called is actually the `equals(Object o)` method defined on `Object`.
+
+In both cases, `Object`'s `equals(Object o)` method tells us that `point1` and `pointObject` are not equal because they do not point to the exact same memory location.
 
 ### Attempt #2: actually overriding the default `equals(Object o)` method
 
@@ -94,7 +110,7 @@ public boolean equals(Object o) {
     }
     
     Point other = (Point) o;
-    return this.x == other.x && this.y == other.y;
+    return (this.x == other.x && this.y == other.y);
 }
 ```
 
@@ -111,7 +127,7 @@ public void test() {
     assertTrue(points.contains(point2)); // this fails        
 }
 ```
-The issue here is that, while we did override the default `equals` method, we didn't override the default `hashCode` method. When our `HashSet` looks for `point2`, it only looks in the hash bucket that corresponds to `point2`'s hash code. Therefore, if two objects are considered equal, we must guarantee that their hash code will also be the same (`hashcode` needs to be consistent with `equals`). Note that it is ok for two different objects to have the same hash code, although it is better to avoid this as it can negatively impact the performance of data strucures that rely on hash codes.
+The issue here is that, while we did override the default `equals` method, we didn't override the default `hashCode` method as well. When our `HashSet` looks for `point2`, it only looks in the hash bucket that corresponds to `point2`'s hash code. Therefore, if two objects are considered equal, we must guarantee that their hash code will also be the same (`hashcode` needs to be consistent with `equals`). Note that it is ok for two different objects to have the same hash code, although it is better to avoid this as it can negatively impact the performance of data strucures that rely on hash codes.
 
 ### Attempt #3: overriding `hashCode` as well
 
@@ -168,7 +184,7 @@ public class Point {
         }
         
         Point other = (Point) o;
-        return this.x == other.x && this.y == other.y;
+        return (this.x == other.x && this.y == other.y);
     }
 
     @Override
@@ -182,7 +198,7 @@ public class Point {
 }
 ```
 
-This is already a pretty decent implementation. Our current `equals` method is actually equivalent to the one that my IDE generates automatically (using the default settings) and our `hashCode` method was already generated by my IDE. Therefore, if I let my IDE do the work for me, this is what I'm going to get by default. But is it enough?
+Our current `equals` method is actually equivalent to the one that my IDE generates automatically (using the default settings) and our `hashCode` method was already generated by my IDE. Therefore, if I let my IDE do the work for me, this is what I'm going to get by default. But is it enough?
 
 Spoiler alert: No, it isn't. At least not once we start looking at subclasses.
 
@@ -196,13 +212,11 @@ public void test() {
 }
 ```
 
-In this test, `point2` is an instance of an anonymous subclass of `Point` that adds no additional behavior or state. Here, `point2` has the exact same x and y coordinate as `point1` (it actually even has exactly identical state and behavior). However, they are not considered to be equal at all. This in principle violates the [Liskov Substitution Principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle) which basically states that everywhere an instance of a certain class is required, you can also pass an instance of a subclass of that class without it causing any unexpected effects. In this case, passing in the anonymous subclass of `Point` where a `Point` is required leads to an unexpected situation where we have two `Point`s that have the same x and y coordinates but are not equal to each other.
-
-*Note that not everybody agrees with this interpretation of the Liskov Substitution Principle, see for example the end of [this article](http://www.artima.com/lejava/articles/equality.html) which we will also refer to in the next section. However, it still seems reasonable to expect that an instance of a subclass of `Point` can be equal to a `Point` instance if both have exactly the same state.*
+In this test, `point2` is an instance of an anonymous subclass of `Point` that adds no additional behavior or state. Here, `point2` has the exact same x and y coordinate as `point1` (it actually even has exactly identical state and behavior). However, they are not considered to be equal at all. This violates the contract for our `equals` method on `Point`, which we defined as "two `Point`s are equal if and only if they have the same x coordinate and the same y coordinate".
 
 The reason why this test fails is that the `equals` method uses `getClass()` to verify if both objects belong to the same class and `getClass()` will actually return a different class for `point1` and `point2`.
 
-Although you will probably not create a lot of trivial anonymous subclasses in real life, you may sometimes want to create a subclass for a class that you defined a custom `equals` method for. Fortunately, we can improve our `equals` method by using `instanceof` instead of `getClass()`.
+Although you will probably not create a lot of trivial anonymous subclasses in real life, you may sometimes want to subclass a class that you defined a custom `equals` method for. Fortunately, we can improve our `equals` method by using `instanceof` instead of `getClass()`.
 
 ### Attempt #5: using `instanceof` instead of `getClass()`
 
@@ -214,7 +228,7 @@ public boolean equals(Object o) {
     }
     
     Point other = (Point) o;
-    return this.x == other.x && this.y == other.y;
+    return (this.x == other.x && this.y == other.y);
 }
 ```
 
@@ -239,9 +253,82 @@ public class ColorPoint extends Point {
 }
 ```
 
-Now, what if we want to include the color in the `equals` method so that a `ColorPoint(1, 1, Color.RED)` is not equal to a `ColorPoint(1, 1, Color.BLUE)`? Well, there is a way to accomplish this, although it is somewhat complicated. It is described at the end of [this article](http://www.artima.com/lejava/articles/equality.html) (which we referred to earlier) and it involves adding a `canEqual` method to our `Point` and `ColorPoint` classes.
+Now, what if we want to include the color in the `equals` method so that a `ColorPoint(1, 1, Color.RED)` is not equal to a `ColorPoint(1, 1, Color.BLUE)`? Well, there is a way to accomplish this. It is also described in [this article](http://www.artima.com/lejava/articles/equality.html).
 
-An important remark here is that, in that solution, a `Point` will never be able to be equal to a `ColorPoint`. The reason for this is that we need our `equals` method to be transitive. If we woud consider a `Point(1, 1)` to be equal to a `ColorPoint(1, 1, Color.RED)` and to a `ColorPoint(1, 1, Color.BLUE)`, which satisfies our original interpretation of the Liskov Substitution Principle, then transivity would imply that a `ColorPoint(1, 1, Color.RED)` and a `ColorPoint(1, 1, Color.BLUE)` must be equal to each other. However, that is exactly what we didn't want.
+An important remark is that, in this solution, a `Point` will never be able to be equal to a `ColorPoint`. The reason for this is that we need our `equals` method to be transitive. If we would follow the contract we envisioned for the `equals` method of `Point` (two `Point`s are equal if and only if they have the same x coordinate and the same y coordinate), this would mean that a `Point(1, 1)` is equal to a `ColorPoint(1, 1, Color.RED)` and to a `ColorPoint(1, 1, Color.BLUE)`. However, transitivity would then imply that a `ColorPoint(1, 1, Color.RED)` and a `ColorPoint(1, 1, Color.BLUE)` must be equal to each other, which is exactly what we didn't want.
+
+Because of this, this solution could cause unexpected behavior in code that depends on the contract that "two `Point`s are equal if and only if they have the same x coordinate and the same y coordinate".
+
+The solution involves introducing a `canEqual` method and letting custom `equals` methods call that method on the *other* object.
+
+```java
+public class Point {    
+    // ...
+    
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Point)) {
+            return false;
+        }
+        
+        Point other = (Point) o;
+        
+        if (!other.canEqual(this)) {
+            return false;
+        }
+        
+        return (this.x == other.x && this.y == other.y);
+    }
+    
+    public boolean canEqual(Object o) {
+        return (o instanceof Point);
+    }    
+    
+    // ...    
+}
+
+public class ColorPoint extends Point {    
+    // ...
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof ColorPoint)) {
+            return false;
+        }
+        
+        ColorPoint other = (ColorPoint) o;
+        
+        if (!other.canEqual(this)) {
+            return false;
+        }
+        
+        return (this.color == other.color 
+                && super.equals(other));
+    }
+    
+    public boolean canEqual(Object o) {
+        return (o instanceof ColorPoint);
+    }
+    
+    // ...    
+}
+```
+
+The `Point` and `ColorPoint` classes both satisfy all of the previous tests. If we would create a new subclass of `Point` or `ColorPoint` without overriding `equals`, `canEqual` or `hashCode` nothing unexpected would happen. If we want to create a new subclass of `Point` or `ColorPoint` that adds additional state and includes this state in its `equals` method, we need to override both `equals` and `canEqual`.
+
+As stated before, the only big drawback of this solution is the fact that it violates our original contract saying that "two `Point`s are equal if and only if they have the same x coordinate and the same y coordinate".
+
+```java
+@Test
+public void test() {    
+    Point point1 = new Point(1, 1);
+    Point point2 = new ColorPoint(1, 1, Color.BLUE);
+            
+    assertTrue(point1.getX() == point2.getX());
+    assertTrue(point1.getY() == point2.getY());
+    assertTrue(point1.equals(point2)); // this fails    
+}
+```
 
 ## How to handle this in practice
 
@@ -255,7 +342,7 @@ Note that the two options outlined in step 2 have different effects:
 -  Making your class `final` prevents any issues with subclasses by simply not allowing subclasses for your class.
 - Making your `equals` and `hashCode` methods `final` prevents subclasses from overriding your `equals` and `hashCode` methods and including additional state in them.
 
-In cases where this is not sufficient, consider having a look at the article that was mentioned earlier.
+In cases where this is not sufficient (you want subclasses to include additional state in their `equals` method), consider using the solution involving the `canEqual` method.
 
 ## Testing your `equals` methods
 
@@ -269,3 +356,8 @@ public void equalsContract() {
 ```
 
 It uses reflection to inspect your class and test its `equals` and `hashCode` methods with 100% coverage. It recognizes all of the possible issues that were outlined in this arcticle (and some others as well). If you're confused by an error message it produces, have a look at [this overview](http://jqno.nl/equalsverifier/errormessages/). If you understand why EqualsVerifier complains about a certain issue but you need it to be less restrictive, you can pass it an additional option to make it ignore that issue. This library should be able to make hand-written `equals` tests a thing of the past.
+
+## Resources
+
+- [EqualsVerifier](http://jqno.nl/equalsverifier/)
+- [How to Write an Equality Method in Java](http://www.artima.com/lejava/articles/equality.html)
