@@ -84,3 +84,10 @@ Another possible approach is to generate your site locally and only push the gen
 
 These advantages are the reason why I chose to generate my site locally and only upload the generated site to GitHub Pages. Of course, this approach has the disadvantage that it is now your own responsibility to make sure that your generated site is consistent with the source files. However, as I am the only person maintaining this blog, that shouldn't be a problem.
 
+## Resources
+
+- [Jekyll](https://jekyllrb.com/)
+- [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+- [GitHub Pages](https://pages.github.com/)
+- [Rouge](http://rouge.jneen.net/)
+- [Setting up your GitHub Pages site locally with Jekyll](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/)
