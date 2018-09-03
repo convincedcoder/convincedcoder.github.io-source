@@ -2,6 +2,7 @@
 layout: post
 title: TypeScript basics
 tags: javascript typescript
+toc: true
 ---
 
 TypeScript is an open source programming language created and maintained by Microsoft. It is based on JavaScript and it extends the JavaScript language with static typing, classes, generics, etc.
@@ -43,7 +44,7 @@ function greet(person: string) {
 
 let user = { name: 'visitor' };
 
-greet(user); // typescript compiler error (type mismath)
+greet(user); // typescript compiler error (type mismatch)
 ```
 
 ### Type inference
@@ -220,7 +221,7 @@ wrapper.replaceWrapped(1); // error: type mismatch
 
 ## Getting started
 
-The [TypeScript quickstart page](https://www.typescriptlang.org/samples/index.html) contains some resouces to get you started, including frameworks like Angular that use TypeScript.
+The [TypeScript quickstart page](https://www.typescriptlang.org/samples/index.html) contains some resources to get you started, including frameworks like Angular that use TypeScript.
 
 If you are just looking for a quick way to play around with the language, you can use the [Playground](https://www.typescriptlang.org/play/index.html).
 

@@ -2,6 +2,7 @@
 layout: post
 title: How I created this blog
 tags: jekyll github-pages
+toc: true
 ---
 
 This post explains why I decided to use Jekyll for my blog and how you could set up your own blog using Jekyll and GitHub Pages.
@@ -53,7 +54,7 @@ If you are looking for a quick way to set up a Jekyll blog on GitHub Pages, [Jek
 
 If you want to modify the look and feel of your blog, you can start modifying `index.html`, `style.scss`, the layouts in the `_layouts` folder and the additional styles in the `_sass` folder.
 
-The look of any highlighted code on your blog is defined in the `_sass/_variables.scss` file. Jekyll uses [Rouge](http://rouge.jneen.net/) for syntax highlighting. Rouge transforms source code into HTML where the code is divided into `<span>` elements with a class that indicates what they represent (keyword, string literal, ...). The `_sass/_variables.scss` file then defines what color to use for each of those classes. I based my version of this file on [the highlighing style used by the GitHub Pages Modernist theme](https://github.com/pages-themes/modernist/blob/master/_sass/rouge-base16-dark.scss).
+The look of any highlighted code on your blog is defined in the `_sass/_variables.scss` file. Jekyll uses [Rouge](http://rouge.jneen.net/) for syntax highlighting. Rouge transforms source code into HTML where the code is divided into `<span>` elements with a class that indicates what they represent (keyword, string literal, ...). The `_sass/_variables.scss` file then defines what color to use for each of those classes. I based my version of this file on [the highlighting style used by the GitHub Pages Modernist theme](https://github.com/pages-themes/modernist/blob/master/_sass/rouge-base16-dark.scss).
 
 ## Structure of a post
 
@@ -82,7 +83,7 @@ Another possible approach is to generate your site locally and only push the gen
 - GitHub Pages runs Jekyll with the `--safe` flag, which means that only Jekyll Plugins that are part of the official repository get executed. If you generate your site locally, you can use any plugin you want (like, for example, the [tagging plugin](https://github.com/pattex/jekyll-tagging) that I am using on this blog).
 - If GitHub Pages makes any changes to the way their built-in Jekyll behaves, you can decide if and when you are going to adjust your site and local setup.
 
-These advantages are the reason why I chose to generate my site locally and only upload the generated site to GitHub Pages. Of course, this approach has the disadvantage that it is now your own responsibility to make sure that your generated site is consistent with the source files. However, as I am the only person maintaining this blog, that shouldn't be a problem.
+These advantages are the reason why I chose to generate my site locally and only upload the generated site to GitHub Pages. Of course, this approach has the disadvantage that it is now my own responsibility to make sure that my generated site is consistent with the source files. However, as I am the only person maintaining this blog, that shouldn't be a problem.
 
 ## Resources
 

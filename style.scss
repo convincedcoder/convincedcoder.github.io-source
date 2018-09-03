@@ -263,11 +263,6 @@ nav {
   border-bottom: 1px solid $lightGray;
 }
 
-.posts > .post:last-child {
-  padding-bottom: 1em;
-  border-bottom: none;
-}
-
 .post {
   blockquote {
     margin: 1.8em .8em;
@@ -328,7 +323,20 @@ a.tag {
     @extend %tag-shared;
     font-size: 100%;
     display: inline-block;
+    margin-bottom: 5px;
   }
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+.page-number {
+  float: right !important;
+}
+
+.page-change-disabled {
+  color: #d0d0d0;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
