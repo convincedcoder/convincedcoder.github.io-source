@@ -7,10 +7,10 @@ toc: true
 
 I think I have finally discovered the best answer to most software development questions. It goes like this: *"It depends"*.
 
-- Should I use Java or Node.js? *It depends*
-- Should I use SQL Server or MongoDB? *It depends*
+- Should I use Java or Node.js for my web application's back end? *It depends*
+- Should I use a relational or NoSQL database? And which one? *It depends*
 - Should I really have more unit than integration tests? *It depends*
-- Should I apply DDD when building this large application? *It depends*
+- Is it bad to have an anemic domain model? *It depends*
 
 Of course, this answer in itself doesn't get you anywhere. However, I do believe that almost every decision you make when developing or designing software is a trade-off. There are a lot of areas to consider, including development effort, maintenance effort, correctness, performance, usability, etc. Not only are most of these hard to quantify at the moment when you make the decision, but typically we also need to make tradeoffs within those areas. We may trade development time right now for development time when we are adding features. We may trade performance in handling use case A for performance in handling use case B.
 
@@ -33,7 +33,7 @@ The application of good architecture and coding practices should provide you wit
 
 ## What about best practices?
 
-Best practices are widely accepted as good solutions, but that doesn't mean they are perfect. Most best practices come with a warning label stating that there are probably some situations where you would want to use another option. This means that it is perfectly possible that you know a best practice, understand its benefits, but still choose to use a different solution. It's not even that unusual that there are different best practice solutions to the same problem that use a completely different approach. If you see two schools of thought vehemently arguing over which is best, it is likely that they both have a good approach that will work.
+Best practices are widely accepted as good solutions, but that doesn't mean they are perfect. Most best practices come with a warning label stating that there are probably some situations where you would want to use another option. This means that it is perfectly possible that you know a best practice, understand its benefits, but still choose to use a different solution. There may even be different best practice solutions to the same problem that use a completely different approach. If you see two schools of thought vehemently arguing over which is best, it is likely that they both have a good approach that will work.
 
 Then again, if there is one clear best practice approach regarding your problem and you don't see a significant reason not to use it, you are probably better off going with that approach.
 

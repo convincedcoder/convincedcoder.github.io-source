@@ -29,6 +29,8 @@ When interacting with a relational database, checking if a conflict has occurred
 
 The typical use case for optimistic locking is retrieving an object, making some changes to it (possibly done by a user) and then saving the result while verifying that no other changes have been made in the meantime. However, it also allows you to lock objects that you need to stay unchanged until after you complete your operation. You can achieve this by simply saving the object as you retrieved it. If this doesn't yield a conflict, you know that the object hasn't changed in the meantime. This strategy could be applicable to our example with items being linked to a group.
 
+#### Benefits and drawbacks
+
 A big benefit of optimistic locking is the flexibility it offers. You don't have to care about when and where the "base version" of your object was retrieved. There's no need for it to be retrieved inside the same transaction where you save the object. This is especially desirable when you need to wait for user input to make the changes, like in our example with users editing descriptions. In such a case, it would be very impractical to keep a database transaction open while a users edits an item. Typically, the user will make separate calls to retrieve the item and to save it, which may even be handled by different instances of your application in a cluster.
 
 Some sources claim that, when using optimistic locking, deadlocks are not possible because it never issues any database-level locks. Further down this post, I will show that this is not true and that optimistic locking (combined with the common transaction isolation level Read Committed) actually acquires a database-level lock from when you save data until your transaction is committed. However, the flexibility of optimistic locking makes it straightforward to prevent deadlocks by always saving objects in the same order (and thus always acquiring database-level locks in the same order).
@@ -40,6 +42,8 @@ An important drawback of optimistic locking is that, if a conflict does occur, y
 Pessimistic locking, as the name implies, uses a less optimistic approach. It assumes that conflicts will occur and it actively blocks anything that could possibly cause a conflict.
 
 When interacting with a relational database, this is done by actively locking database rows or even database tables when you retrieve the data you will operate on. The locks will be held until your transaction completes. There are generally two types of locks: shared locks (read locks) and exclusive locks (write locks). Shared locks are used for reading data that you simply need to stay the same until your operation completes. A shared lock allows others to take a shared lock as well (you still allow others to read the object as this does not create a conflict). Exclusive locks are used for reading and updating data that you want to change. Exclusive locks do not allow anyone else to take a lock on the same data. Any attempts to obtain a lock when it's not allowed at the time will block until the conflicting locks are released.
+
+#### Benefits and drawbacks
 
 The main benefit of pessimistic locking is that you can completely prevent conflicts from occurring, meaning that you don't have to deal with the situation where you have a conflict. This can also make it the best-performing strategy in high-concurrency environments where the chance of having conflicts is high.
 
@@ -54,8 +58,6 @@ Additionally, if you use pessimistic locking in situations where you need to wai
 ## Combining different strategies
 
 Note that it is possible for different locking strategies to exist at different levels in your application. As an example, let's take the application where users can edit items and their descriptions. A possible approach could be to require users to "check out" items before editing them, blocking other users from editing those items while they are checked out. The system would use an additional table to store which item is checked out by which user. This is a form of pessimistic locking. However, at the level of the communication with the database, conflicts caused by users concurrently trying to check out the same item could be dealt with using optimistic locking.
-
-It is in principle even possible use different locking strategies in the way different parts of your application communicate with your relational database.
 
 ## Implementation using SQL
 
@@ -72,30 +74,34 @@ If you use this strategy, it actually acquires a database-level lock on the row 
 BEGIN TRANSACTION               BEGIN TRANSACTION
 
 UPDATE items                    UPDATE items 
-SET version = version + 1       SET version = version + 1
+SET name = 'newNameA',          SET name = 'newNameB',
+    version = version + 1          version = version + 1
 WHERE id = 1 AND version = 1    WHERE id = 2 AND version = 1
 
 UPDATE items                    UPDATE items 
-SET version = version + 1       SET version = version + 1
+SET name = 'newNameD',          SET name = 'newNameC',
+    version = version + 1          version = version + 1
 WHERE id = 2 AND version = 1    WHERE id = 1 AND version = 1
 
 COMMIT TRANSACTION              COMMIT TRANSACTION
 ```
 
-Let's assume that these transactions execute concurrently and that both have executed their first UPDATE statement. If transaction A then executes its second update statement, it will block and wait for transaction B to either commit or roll back (the result of the statement depends on uncommitted changes made by transaction B). If transaction B then executes its second update statement, we have a deadlock.
+Let's assume that these transactions execute concurrently and that both have executed their first UPDATE statement. If transaction A then executes its second update statement, it will block and wait for transaction B to either commit or roll back (the result of the statement depends on uncommitted changes made by transaction B). If transaction B then executes its second update statement, we have a deadlock. Fortunately, the flexibility of optimistic locking makes it easy to prevent deadlocks by always locking rows in the same order.
 
-### Optimistic locking using OUTPUT/RETURNING
+### Optimistic locking using OUTPUT/RETURNING or a separate SELECT query
 
-Another way of implementing optimistic locking is using the OUTPUT (SQL Server) or RETURNING (PostgreSQL) statement that allows an UPDATE statement to return the updated data. Note that not all relational databases offer this kind of statement. Here is an example of such a statement.
+Another way of implementing optimistic locking is by obtaining the resulting version number after the update. If it's more than one higher than the original version, you know there has been another change in the meantime. This strategy can be implemented using the OUTPUT (SQL Server) or RETURNING (PostgreSQL) statement that allows an UPDATE statement to return the updated data. Note that not all relational databases offer this kind of statement. Here is an example of such a statement.
 
 ```sql
 UPDATE items
-SET version = version + 1
+SET name = 'newName', version = version + 1
 WHERE id = 1
 RETURNING version
 ```
 
 In this case, the update returns the actual version resulting from the update and your application can check if this matches the expected new version number. Just like the first implementation, this locks the updated rows until the end of the transaction.
+
+For databases not supporting the OUTPUT or RETURNING clause, a separate SELECT statement can be used. Note that, even without the RETURNING statement, the above query locks the row until the end of the transaction.
 
 ### Pessimistic locking
 
@@ -137,7 +143,7 @@ Another approach could be to use pessimistic locking. The simplest option is to 
 
 One alternative to optimistic and pessimistic locking is to structure your data and application in such a way that all of your updates are made using atomic UPDATE statements that only update the actually changed data. If an item has both a code and a name, you could foresee separate calls to update either one of them and implement those using simple UPDATE statements that update only the new code or name. This could be a good solution for concurrency issues encountered in a simple CRUD application where the typical retrieve-modify-save approach of ORMs can lead to data being lost. Do note, however, that this may get tricky when relations are involved. There may also be situations where the new value to save depends on other existing values.
 
-This approach could also be applicable when the validity of an update depends on the status of a related object, but only if we move the checks for that to the database. For example, if we want to update an item's group and be entirely sure that we don't link to an inactive group, we could foresee a separate table with the IDs of active groups and link items to that table. However, if you choose this approach, you need a good way of handling errors.
+This approach could also be applicable when the validity of an update depends on the status of a related object, but only if we move the checks for that to the database. For example, if we want to update an item's group and be entirely sure that we don't link to an inactive group, we could foresee a separate table with the IDs of active groups and link items to that table.
 
 An important remark is that this approach does not solve the problem of data being lost if multiple users concurrently edit the description for the same item based on the same initial version.
 

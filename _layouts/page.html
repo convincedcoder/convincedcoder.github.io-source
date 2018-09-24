@@ -16,3 +16,19 @@ layout: default
 <div id="tag-cloud">
   {{ site | tag_cloud }}
 </div>
+
+<h1>All posts</h1>
+
+<ul>
+{% for post in site.posts %}
+  <li>
+      <a href="{{ post.url }}" class="base-text-color">{{ post.title }}</a> 
+      <span class="date">({{ post.date | date: "%Y-%m-%d" }})</span>
+      <br>
+      {% for tag in post.tags %}       
+        {% capture tag_name %}{{ tag }}{% endcapture %}     
+        <a href="/tag/{{ tag_name }}" class="tag">{{  tag_name }}</a>
+    {% endfor %}
+    </li>
+{% endfor %}
+</ul>
