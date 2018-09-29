@@ -130,6 +130,10 @@ As is often the case, choosing which data store to use is a tradeoff and their i
 
 Also note that there is no rule stating that you should use either SQL, NoSQL or NewSQL. For example, it is very common to use a relational database for your application's domain data but use a key-value store for caching purposes. Additionally, it could be a good idea to store parts of your domain data in a relational database and other parts in a document database, depending on which one is a better fit for which part of the data. Of course, using multiple systems also means having to keep multiple systems running smoothly.
 
+## Hosted data stores
+
+When you are evaluating data stores for your project, it is a good idea to also consider the hosted data stores that are offered by cloud providers like AWS or Microsoft Azure. These hosted data stores include SQL, NoSQL and NewSQL data stores and using one of them could save you the headaches involved in managing your own data store or data store cluster.
+
 ## Resources
 
 - [Relational database](https://en.wikipedia.org/wiki/Relational_database)
