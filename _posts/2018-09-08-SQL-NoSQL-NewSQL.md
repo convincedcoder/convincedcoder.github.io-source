@@ -108,13 +108,13 @@ A popular use case for key-value stores is setting up clusters of key-value stor
 
 Graph databases are a good fit when your data can naturally be represented as a network of nodes connected by edges that represent relationships between nodes. An example of this are people on a social network site and their friends. If you model this as each person being a node and each friendship being an edge connecting nodes, storing the data in a graph database hep you recommend friends of friends, identify clusters of people that are all friends of each other, etc.
 
-A well-known example of a graph database is Neo4j. It is also interesting to know that there actually exist extensions to RBMSes (for example PostgreSQL) that offer graph database capabilities as well.
+A well-known example of a graph database is Neo4j. It is also interesting to know that there actually exist extensions to RDBMSes (for example PostgreSQL) that offer graph database capabilities as well.
 
 #### Time-series database
 
 Time-series databases are aimed at storing values that change throughout time. An obvious use case for this is storing data obtained from sensors that are constantly measuring values like temperature, humidity, etc. Time-series databases have storage engines and query languages that are optimized for storing time-series data, making it easy and efficient to perform time-based queries. An example would be to take a year's worth of temperature measurements (one measurement each minute) and then retrieve the maximum and minimum measured temperature per week.
 
-Some example of time-series databases are InfluxDB and SiriDB. Also note that there exist extensions to RBMSes that offer time-series database capabilities. A example of this is Timescale, which builds upon PostgreSQL.
+Some example of time-series databases are InfluxDB and SiriDB. Also note that there exist extensions to RDBMSes that offer time-series database capabilities. A example of this is Timescale, which builds upon PostgreSQL.
 
 ## NewSQL
 
