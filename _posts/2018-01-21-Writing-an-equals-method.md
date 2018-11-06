@@ -31,7 +31,7 @@ If you want to define equality in such a way that two objects can be considered 
 - Symmetry: if a is equal to b, then b is also equal to a
 - Transitivity: if a is equal to b and b is equal to c, then a is also equal to c
 - Consistency: if a is equal to b right now, then a is always equal to b as long as none of their state that is used in the `equals` method has been modified
-- Non-nullity: a actual object is never equal to `null`
+- Non-nullity: an actual object is never equal to `null`
 
 ## Introducing the `Point` class
 
