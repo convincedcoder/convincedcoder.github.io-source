@@ -96,7 +96,7 @@ public void test() {
 
 #### Short aside: method overloading and overriding rules in Java
 
-When calling methods, Java determines the exact method to call in a way that can be confusing. There are basically two steps:
+When calling methods, Java determines the exact method to call in a way that can be confusing at first. There are basically two steps:
 
 1. At compile time, the number and compile-time types of the arguments are used to determine the exact *signature* of the method that will be invoked.
 2. At runtime, if the method to be invoked is an instance method, the actual method to invoke will be determined using dynamic method lookup based on the actual run time type of the object and the structure of the inheritance hierarchy.
