@@ -126,7 +126,7 @@ NewSQL systems are a class of relational database management systems that aim at
 
 ## Which one to use?
 
-As is often the case, choosing which data store to use is a tradeoff and their is likely no "wrong" or "right" choice. Your choice will likely depend on the kind of data you need to store, the scalability you need, the consistency you need, the knowledge of your team, etc.
+As is often the case, choosing which data store to use is a tradeoff and there is likely no "wrong" or "right" choice. Your choice will likely depend on the kind of data you need to store, the scalability you need, the consistency you need, the knowledge of your team, etc.
 
 Also note that there is no rule stating that you should use either SQL, NoSQL or NewSQL. For example, it is very common to use a relational database for your application's domain data but use a key-value store for caching purposes. Additionally, it could be a good idea to store parts of your domain data in a relational database and other parts in a document database, depending on which one is a better fit for which part of the data. Of course, using multiple systems also means having to keep multiple systems running smoothly.
 
