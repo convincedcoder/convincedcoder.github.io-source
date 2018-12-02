@@ -85,6 +85,8 @@ Another possible approach is to generate your site locally and only push the gen
 
 These advantages are the reason why I chose to generate my site locally and only upload the generated site to GitHub Pages. Of course, this approach has the disadvantage that it is now my own responsibility to make sure that my generated site is consistent with the source files. However, as I am the only person maintaining this blog, that shouldn't be a problem.
 
+If you want to follow this approach, I recommend adding a `.nojekyll` file to the generated site before pushing it to GitHub. This makes sure that GitHub doesn't attempt to run Jekyll on your already-generated site. I had to do this in order to fix an issue where GitHub was unable to process changes I made to my blog.
+
 ## Resources
 
 - [Jekyll](https://jekyllrb.com/)
