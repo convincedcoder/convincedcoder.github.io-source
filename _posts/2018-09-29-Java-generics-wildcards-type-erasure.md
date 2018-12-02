@@ -228,7 +228,7 @@ public boolean add(Object dog) {
 }
 ```
 
-After erasure, it is the bridge method actually overrides the `ArrayList.add(Object)` method. It then calls the `GoodBoyList.add(Dog)` method.
+After erasure, it is the bridge method that actually overrides the `ArrayList.add(Object)` method. It then calls the `GoodBoyList.add(Dog)` method.
 
 Bridge methods can also be used when the return type varies. For example, imagine that our `GoodBoyList` also overrides the `get(int)` method.
 
@@ -289,7 +289,7 @@ A type parameter must always be `Object` or a subclass of `Object`. This means t
 
 ### At runtime, all types are raw
 
-Type erasure means that, at runtime, all types are raw. Therefore, something like `if (object instanceof ArrayList<Dog>)` will not compile because this check is impossible to execute at compile time.
+Type erasure means that, at runtime, all types are raw. Therefore, something like `if (object instanceof ArrayList<Dog>)` will not compile because this check is impossible to execute at runtime.
 
 The `Class` instances that you get are also always raw types. There is no `ArrayList<Dog>.class`, only `ArrayList.class`.
 
@@ -305,7 +305,7 @@ Note that, while you cannot instantiate an array of type `T`, you can easily cre
 
 Although you can declare arrays of a parameterized type (e.g. `AnimalWrapper<Dog>[]`), it is not possible to instantiate an array of that type. This is because, after erasure, we would just get an `AnimalWrapper[]` array that allows any kind of `AnimalWrapper` without throwing an `ArrayStoreException`. If that is what you want, you can create an `AnimalWrapper[]` and then cast it to `AnimalWrapper<Dog>[]` (this will generate compiler warnings though).
 
-The simplest solution if often to just create an `ArrayList<AnimalWrapper<Dog>>` instead.
+The simplest solution is often to just create an `ArrayList<AnimalWrapper<Dog>>` instead.
 
 ### Class type variables are not valid in static contexts
 
