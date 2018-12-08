@@ -101,6 +101,8 @@ When calling methods, Java determines the exact method to call in a way that can
 1. At compile time, the number and compile-time types of the arguments are used to determine the exact *signature* of the method that will be invoked.
 2. At runtime, if the method to be invoked is an instance method, the actual method to invoke will be determined using dynamic method lookup based on the actual run time type of the object and the structure of the inheritance hierarchy.
 
+For more info, check the post on [Java overloading, overriding and method hiding]({% post_url 2018-12-08-Java-overloading-overriding-method-hiding %}).
+
 In the code above, we have two classes: `Object`, which has a method `equals(Object)`, and the class `Point`, which has a method `equals(Point)` and also inherits the `equals(Object)` method from `Object`. What happens in the code is the following:
 
 - In the first assertion, we are calling a method with signature `equals(Object)` on an object with compile-time type `Point`. As `Point` does not implement a method with that signature, the best match is the `equals(Object)` method inherited from `Object`.
