@@ -114,7 +114,7 @@ A well-known example of a graph database is Neo4j. It is also interesting to kno
 
 Time-series databases are aimed at storing values that change throughout time. An obvious use case for this is storing data obtained from sensors that are constantly measuring values like temperature, humidity, etc. Time-series databases have storage engines and query languages that are optimized for storing time-series data, making it easy and efficient to perform time-based queries. An example would be to take a year's worth of temperature measurements (one measurement each minute) and then retrieve the maximum and minimum measured temperature per week.
 
-Some example of time-series databases are InfluxDB and SiriDB. Also note that there exist extensions to RDBMSes that offer time-series database capabilities. A example of this is Timescale, which builds upon PostgreSQL.
+Some examples of time-series databases are InfluxDB and SiriDB. Also note that there exist extensions to RDBMSes that offer time-series database capabilities. An example of this is Timescale, which builds upon PostgreSQL.
 
 ## NewSQL
 
@@ -132,7 +132,7 @@ Also note that there is no rule stating that you should use either SQL, NoSQL or
 
 ## Hosted data stores
 
-When you are evaluating data stores for your project, it is a good idea to also consider the hosted data stores that are offered by cloud providers like AWS or Microsoft Azure. These hosted data stores include SQL, NoSQL and NewSQL data stores and using one of them could save you the headaches involved in managing your own data store or data store cluster.
+When you are evaluating data stores for your project, it is a good idea to also consider the hosted data stores that are offered by cloud providers like AWS or Microsoft Azure. These hosted data stores include SQL, NoSQL and NewSQL data stores and using one of them could save you the headaches involved in managing your own data store or data store cluster. However, you should be careful regarding the amount of vendor lock-in this generates.
 
 ## Resources
 
