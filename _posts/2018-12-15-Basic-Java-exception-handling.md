@@ -15,7 +15,7 @@ As an alternative to this, Java and a lot of other modern languages support the 
 
 In Java, there are several kinds of exceptions. The following image describes what the general hierarchy of exception classes in Java looks like.
 
-![Exception hierarchy](/images\2018-12-15-Java-exception-handling\exception-hierarchy.png)
+![Exception hierarchy](/images/2018-12-15-Java-exception-handling/exception-hierarchy.png)
 
 All exceptions are direct or indirect subclasses of the `Throwable` class. Subclasses of `Error` are exceptions defined by the Java language that are thrown when something really bad happens that the code can normally not recover from by itself. An example of this is `OutOfMemoryError`, which occurs when Java is unable to allocate space to an object because there is no more memory available and garbage collection does not help. If you run into that one, the best you can generally do is exit the program. 
 
