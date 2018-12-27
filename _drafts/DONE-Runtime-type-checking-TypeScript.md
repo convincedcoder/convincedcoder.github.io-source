@@ -11,7 +11,7 @@ This post will discuss some possibilities for adding runtime type checking to Ty
 
 You might wonder why it's even needed to add additional type checking if you're already using TypeScript. Isn't type checking exactly what TypeScript is about? Well, TypeScript only performs static type checking at compile time. The generated JavaScript, which is what actually runs when you run your code, does not know anything about the types. While this works fine for type checking within your codebase, it doesn't provide any kind of protection against malformed input.
 
-An example is an API that you expose. Even though you can use TypeScript to describe the input structure that your code should expect, TypeScript itself doesn't provide any way to check that the input that is provided at runtime actually matches that structure. This is by design: the TypeScript team has limited their scope to compile-time checking only. Therefore, if you receive any kind of input from the outside world, it is typically a good idea to use additional runtime type checking.
+An example is an API that you expose. Even though you can use TypeScript to describe the input structure that your code should expect, TypeScript itself doesn't provide any way to check that the input that is provided at runtime actually matches that structure. This is by design: the TypeScript team has limited their scope to compile-time checking only. Therefore, if you receive any kind of input from the outside world, it is typically a good idea to perform some additional runtime type checking.
 
 As an example to use throughout this post, let's say we have a simple API accepting a person with the following structure:
 
@@ -27,7 +27,7 @@ interface Person {
 
 An obvious approach here would be to manually write code that checks the input for the existence of the required properties and checks their type as well. However, writing such code can be tedious and error-prone. There is also a possibility for the error-checking code to get out of sync with your static types as changes are made to the codebase.
 
-## Manually generating JSON Schemas
+## Manually creating JSON Schemas
 
 JSON Schemas are a standard way of constraining the format of JSON input that you receive. Several non-TypeScript applications already use this approach to validate received input.
 
