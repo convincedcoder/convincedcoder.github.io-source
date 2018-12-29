@@ -5,7 +5,7 @@ tags: java
 toc: true
 ---
 
-This article is a review of interfaces in Java, including modern interfaces in Java 8 and later.
+This post is a review of interfaces in Java, including modern interfaces in Java 8 and later.
 
 ## The idea behind interfaces
 
@@ -48,7 +48,7 @@ public interface Collection<E> extends Iterable<E> {
 
 Default methods are also a clean alternative to the widespread pattern of declaring an interface (with only abstract methods) and then offering an abstract companion class providing default implementations for most of the methods. An example of that pattern is the `Collection` interface, for which there is an `AbstractCollection` class providing default implementations.
 
-In addition to default methods, modern Java now also allows interfaces to specify static methods and private methods (introduced in Java 9). Static methods in interfaces can be useful as factory methods. We will see more about this in an upcoming article on lambda expressions. Private methods are useful as helper methods for the default methods specified in the interface.
+In addition to default methods, modern Java now also allows interfaces to specify static methods and private methods (introduced in Java 9). Static methods in interfaces can be useful as factory methods. We will see examples of this in an upcoming article on lambda expressions. Private methods are useful as helper methods for the default methods specified in the interface.
 
 ## Abstract classes vs. interfaces
 

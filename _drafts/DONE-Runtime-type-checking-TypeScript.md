@@ -111,7 +111,7 @@ const test = t.ref(Person).assert({
 });
 ```
 
-A drawback of this approach is that you have no control over the locations where the type checking happens: every type check is converted into a runtime type check. This is typically overkill, as you also need runtime type checking at the boundaries of your program to check input structure.
+A drawback of this approach is that you have no control over the locations where the type checking happens: every type check is converted into a runtime type check. This is typically overkill, as you only need runtime type checking at the boundaries of your program to check input structure.
 
 Also note that this library is currently still in an experimental stage and not recommended for production use.
 
