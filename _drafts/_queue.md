@@ -1,0 +1,14 @@
+- Lambda expressions
+- Runtime type checking TypeScript
+- Processing TypeScript using TypeScript
+- Streams
+- The Optional type
+- The Java platform module system
+- Java date and time API
+- New in Java 10 and 11
+- posts JavaScript foundations
+- some basic general posts
+- JavaScript concurrency model, Node.js event loop, 
+- parallel JavaScript execution, web workers, Node.js worker threads
+- Java concurrency
+- posts on architecture

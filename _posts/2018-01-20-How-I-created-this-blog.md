@@ -1,7 +1,6 @@
 ---
 layout: post
 title: How I created this blog
-tags: jekyll github-pages
 toc: true
 ---
 

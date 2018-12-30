@@ -153,6 +153,8 @@ This is a very nice approach for working with interfaces. Because the static typ
 
 A drawback of io-ts is that it requires you to define your types as io-ts runtime types, which does not work when you are defining classes. One way to handle this could be to define an interface using io-ts and then make the class implement the interface. However, this means you need to make sure to update the io-ts type whenever you are adding properties to your class.
 
+The fact that your code specifies interfaces as io-ts types rather than plain TypeScript interfaces can also be a drawback. While plain TypeScript interfaces can easily be shared, for example between backend and frontend, this is a lot harder to achieve with io-ts types.
+
 ## A TypeScript alternative to Java's Bean Validation
 
 As a final candidate, I am including the [class-validator](https://github.com/typestack/class-validator) library. This library uses decorators on class properties, making it very similar to Java's JSR-380 Bean Validation 2.0 (implemented by, for example, Hibernate Validator). It is part of a family of libraries that also includes [typeorm](https://github.com/typeorm/typeorm) (ORM, similar to Java's JPA) and [routing-controllers](https://github.com/typestack/routing-controllers) (similar to Java's JAX-RS for defining APIs).
@@ -194,4 +196,4 @@ validate(inputAsClassInstance).then(errors => {
 
 Note that class-validator needs actual class instances to work on. Here, we used its sister library class-transformer to transform our plain input into an actual `Person` instance. That transformation in itself does not perform any kind of type checking.
 
-This approach works well with classes, but setting up classes with the decorators that class-validator needs (an alternative is defining schemas manually) and converting the objects you receive to instances of those classes can feel like overkill if all you need to check is a simple interface.
+This approach works well with classes, but setting up classes with the decorators that class-validator needs and converting the objects you receive to instances of those classes can feel like overkill if all you need to check is a simple interface. You may want to consider other approaches, like for example the one using io-ts.

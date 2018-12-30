@@ -54,7 +54,7 @@ public static int test() {
 
 If there is only a single argument with an inferred type, we can even omit the parentheses around that argument.
 
-## Functional interfaces in Java
+## Functional interfaces
 
 In the last example, we really saw lambda expressions in action: we have a `compareStrings`
 function taking a `Comparator<String>` and we invoke it by passing an anonymous function conforming to that interface. We cannot do this for just any interface. The special thing about the `Comparator<String>` interface is that it has a single abstract method (`compare` in this case). Such an interface is called a *functional interface*. Whenever a piece of code needs an object conforming to a functional interface, you can pass a lambda expression implementing the single abstract method of that interface.
@@ -71,7 +71,7 @@ System.out.println(testPred.test(null)); // true
 
 There are also several other interfaces in the Java standard library which are functional interfaces. Examples are `java.util.Comparator`, which we saw above, and `java.lang.Runnable`. These specific ones are also marked with `@FunctionalInterface`, but note that that is not required to make an interface an actual interface. Any interface with a single abstract method is a functional interface. The only thing the `@FunctionalInterface` annotation does is that it makes this explicit (also in generated documentation) and causes the compiler to check if there is indeed only a single abstract method.
 
-Although it is considered good practice to use existing functional interfaces where possible, you can also define your own functional interfaces. This is mostly useful if you need to accept lambda expressions with some uncommon signature. An example of this is an expression taking two `int` values and returning an instance of a custom `Color` class. You could in principle use the `BiFunction<Integer, Integer, Color>` interface, but you can avoid automatic boxing ad unboxing between `int` and `Integer` by specifying your own function interface. Another use case could be an expression taking a String and potentially throwing a checked exception, which should then be declared on the abstract method of the functional interface.
+Although it is considered good practice to use existing functional interfaces where possible, you can also define your own functional interfaces. This is mostly useful if you need to accept lambda expressions with some uncommon signature. An example of this is an expression taking two `int` values and returning an instance of a custom `Color` class. You could in principle use the `BiFunction<Integer, Integer, Color>` interface, but you can avoid automatic boxing ad unboxing between `int` and `Integer` by specifying your own function interface. Another use case could be an expression taking a String and potentially throwing a checked exception, which should then be declared on the abstract method of the functional interface. If you create a custom functional interface, don't forget to mark it using the `@FunctionalInterface` annotation.
 
 ## Lambda expression scope
 
@@ -141,7 +141,7 @@ This way, Java supports the creation of *higher-order functions*, which are meth
 Java now also has a powerful mechanism to pass regular methods around as objects, which is essentially a shorthand for writing lambda expressions invoking the same methods. This is the mechanism of *method references*. There are three variations here:
 
 - *Class::staticMethod*: a reference to a static method of a class
-- *Class::instanceMethod*: a reference to an instance method of a class. The fist argument specifies the object on which the instance method is invoked.
+- *Class::instanceMethod*: a reference to an instance method of a class. The first argument specifies the object on which the instance method is invoked.
 - *object::instanceMethod*: a reference to an instance method of a class which will be invoked an a specific object.
 
 ```java
@@ -336,7 +336,7 @@ public class Test {
         // using a local variable referring to this
         Test outer = this;
         // available from Java 10
-        // also works if outer class is anonymous
+        // also works if this is instance of anonymous class
         var outer2 = this;
         
         InterfaceA interfaceA = new InterfaceA() {            
