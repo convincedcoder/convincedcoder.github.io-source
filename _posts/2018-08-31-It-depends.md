@@ -7,7 +7,7 @@ toc: true
 
 I think I have finally discovered the best answer to most software development questions. It goes like this: *"It depends"*.
 
-- Should I use Java or Node.js for my web application's back end? *It depends*
+- What technology should I use for my web application's back end? *It depends*
 - Should I use a relational or NoSQL database? And which one? *It depends*
 - Should I really have more unit than integration tests? *It depends*
 - Is it bad to have an anemic domain model? *It depends*

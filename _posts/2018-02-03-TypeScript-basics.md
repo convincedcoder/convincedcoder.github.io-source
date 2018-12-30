@@ -1,7 +1,7 @@
 ---
 layout: post
 title: TypeScript basics
-tags: javascript typescript
+tags: typescript javascript
 toc: true
 ---
 

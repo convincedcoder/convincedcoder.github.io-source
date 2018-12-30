@@ -19,7 +19,7 @@ Although there is an SQL standard describing the query language and behavior of 
 
 In relational databases, data is stored in tables (actually called relations in relational terminology). Each table has a set of columns, each of a certain type, that can hold data for the rows in the table. Typically, each table has a subset of columns, the table's primary key (PK), that uniquely identifies each row in the table. There may also be other subsets of columns uniquely identifying each row in the table , known as alternate keys (AK). Indexes can be defined on columns or sets of columns. The columns in an index may or may not form a key.
 
-Rows and different tables can be linked to each other through relationships. A table can link to another table by including the column(s) of that table's primary Key. This is called a foreign key (FK). This way, it is possible to link rows in a table to rows in another table, forming one-to-one relationships and one-to-many relationships. It is also possible to represent many-to-many relationships by using an intermediate table to store foreign keys to both tables in the relationship.
+Rows in different tables can be linked to each other through relationships. A table can link to another table by including the column(s) of that table's primary Key. This is called a foreign key (FK). This way, it is possible to link rows in a table to rows in another table, forming one-to-one relationships and one-to-many relationships. It is also possible to represent many-to-many relationships by using an intermediate table to store foreign keys to both tables in the relationship.
 
 All of the tables, columns, keys, relationships, etc. are defined in the database schema. The database actively enforces the schema and forbids data that doesn't match it (incorrect data type for a column, foreign key linking to a row that doesn't exist, ...).
 
@@ -70,7 +70,7 @@ Different NoSQL data stores focus on different properties regarding their distri
 
 #### CAP consistency vs. ACID consistency
 
-Note that CAP's consistency is not the same as ACID's consistency. In fact, when relational databases are deployed in a distributed fashion, there are typically different modes available that have an impact on CAP consistency. For example, when settings up a high-availability cluster for Microsoft SQL Server, you have the choice between the availability modes *synchronous commit* and *asynchronous commit*. Synchronous commit waits to return for a transaction until it has effectively been synchronized to other instances. Keeping instances synchronized means that no data is lost if the primary instance crashes and another instance takes over, but a transaction may not be able to complete if there are network failures that hinder the synchronization. On the other hand, asynchronous commit does not wait for other instances to catch up. This means that freshly-committed data may be lost if the primary instance crashes before the secondary instances have caught up.
+Note that CAP's consistency is not the same as ACID's consistency. In fact, when relational databases are deployed in a distributed fashion, there are typically different modes available that can have an impact on CAP consistency. For example, when settings up a high-availability cluster for Microsoft SQL Server, you have the choice between the availability modes *synchronous commit* and *asynchronous commit*. Synchronous commit waits to return for a transaction until it has effectively been synchronized to the other instances (secondary replicas). Asynchronous commit, on the other hand, does not wait for the secondary replicas to catch up. If asynchronous commit is used and the cluster is configured to allow reads to go directly to the secondary replicas, it is possible that reads return stale data.
 
 #### NoSQL vs. ACID
 
@@ -142,6 +142,7 @@ When you are evaluating data stores for your project, it is a good idea to also 
 - [NoSQL](https://en.wikipedia.org/wiki/NoSQL)
 - [CAP theorem](https://en.wikipedia.org/wiki/CAP_theorem)
 - [SQL Server Availability Modes](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/availability-modes-always-on-availability-groups?view=sql-server-2017)
+- [Offload read-only workload to secondary replica of an Always On availability group](https://docs.microsoft.com/en-us/sql/database-engine/availability-groups/windows/active-secondaries-readable-secondary-replicas-always-on-availability-groups?view=sql-server-2017)
 - [Living Without Transactions](https://stackoverflow.com/a/39210371)
 - [Patterns for Schema Changes in Document Databases](https://stackoverflow.com/questions/5029580/patterns-for-schema-changes-in-document-databases)
 - [NewSQL](https://en.wikipedia.org/wiki/NewSQL)
