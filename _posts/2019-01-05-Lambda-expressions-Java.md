@@ -187,7 +187,7 @@ list.sort(String::compareToIgnoreCase);
 list.forEach(System.out::println);
 ```
 
-As another practical example, consider the `Comparator.comparing` method. This method takes a method reference that extract the value to compare. This allows for easy construction of custom `Comparator` instances.
+As another practical example, consider the `Comparator.comparing` method. This method takes a method reference that extracts the values to compare. This allows for easy construction of custom `Comparator` instances.
 
 ```java
 personList.sort(Comparator
@@ -358,7 +358,7 @@ Lambda expressions can be used as the value for variables or parameters that hav
 
 Well, not quite. When you write a lambda expression, Java uses that to create an instance of some class that implements the relevant functional interface. This is similar to what happens when using an anonymous class. The way these objects and classes are managed depends on the specific Java implementation and can be highly optimized.
 
-In order to see this in action, let's use a lambda expression and an anonymous function to fill a variable that has a functional interface as its type.
+In order to see this in action, let's use a lambda expression and an anonymous class to fill a variable that has a functional interface as its type.
 
 ```java
 Predicate<String> pred1 = (string -> string.length() > 1);
