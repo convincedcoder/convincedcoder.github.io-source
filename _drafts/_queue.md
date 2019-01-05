@@ -1,4 +1,3 @@
-- Lambda expressions
 - Runtime type checking TypeScript
 - Processing TypeScript using TypeScript
 - Streams

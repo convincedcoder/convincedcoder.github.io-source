@@ -125,7 +125,7 @@ const customCompilerHost: ts.CompilerHost = {
             );
         }
     },
-    writeFile: (filename, data) => console.log(data),
+    writeFile: (filename, data) => {},
     getDefaultLibFileName: () => "lib.d.ts",
     useCaseSensitiveFileNames: () => false,
     getCanonicalFileName: filename => filename,
@@ -185,7 +185,7 @@ It is also interesting to note that, if the file you transpile imports other Typ
 
 ## Getting diagnostics
 
-If you have a Program, you can use that Program to obtain diagnostics for the code. In order to get the compiler errors or warnings, use the `getPreEmitDiagnostics()` method. As an example, take a look at the following code which prints the diagnostics for its own code.
+If you have a Program, you can use that Program to obtain diagnostics for the code. In order to get the compiler errors or warnings, use the `getPreEmitDiagnostics()` method. As an example, take a look at the following code which prints its own diagnostics.
 
 ```typescript
 import * as ts from "typescript";
@@ -274,7 +274,7 @@ The documentation for the compiler API includes an example that uses a TypeCheck
 
 ## Use case: altering or creating code programmatically
 
-It is possible that you want to analyze some TypeScript source code and then alter it in some cases. One way to do this is to traverse the AST and generate a list of changes you want to perform on the code (e.g., remove 2 characters starting from position 11 and insert the string "test" instead). Then, take the source code as a string and apply the changes in reverse order (starting from the end of the source code, so your changes don't change the positions where the other changes need to happen).
+It is possible that you want to analyze some TypeScript source code and then alter it in some cases. One way to do this is to traverse the AST and generate a list of changes you want to perform on the code (e.g., remove 2 characters starting from position 11 and insert the string "test" instead). Then, take the source code as a string and apply the changes in reverse order (starting from the end of the source code, so your changes don't affect the positions where the other changes need to happen).
 
 You can also programmatically create AST nodes and use them to programmatically generate new TypeScript code.
 

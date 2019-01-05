@@ -153,7 +153,7 @@ This is a very nice approach for working with interfaces. Because the static typ
 
 A drawback of io-ts is that it requires you to define your types as io-ts runtime types, which does not work when you are defining classes. One way to handle this could be to define an interface using io-ts and then make the class implement the interface. However, this means you need to make sure to update the io-ts type whenever you are adding properties to your class.
 
-The fact that your code specifies interfaces as io-ts types rather than plain TypeScript interfaces can also be a drawback. While plain TypeScript interfaces can easily be shared, for example between backend and frontend, this is a lot harder to achieve with io-ts types.
+The fact that your code specifies interfaces as io-ts types rather than plain TypeScript interfaces can also be a drawback. While plain TypeScript interfaces can easily be shared, for example between backend and frontend, this becomes harder to achieve with io-ts types.
 
 ## A TypeScript alternative to Java's Bean Validation
 
