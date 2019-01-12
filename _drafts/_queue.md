@@ -1,13 +1,15 @@
-- Runtime type checking TypeScript
 - Processing TypeScript using TypeScript
+- Code review and pairing workflows
+- Trunk-based development
+- Keep it simple
+- posts on architecture
 - Streams
 - The Optional type
 - The Java platform module system
 - Java date and time API
 - New in Java 10 and 11
+- some basic general posts (sunk cost fallacy, pen and paper as a coding tool)
 - posts JavaScript foundations
-- some basic general posts
 - JavaScript concurrency model, Node.js event loop, 
 - parallel JavaScript execution, web workers, Node.js worker threads
 - Java concurrency
-- posts on architecture
