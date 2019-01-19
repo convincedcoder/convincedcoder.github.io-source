@@ -1,7 +1,7 @@
-- Processing TypeScript using TypeScript
 - Code review and pairing workflows
 - Trunk-based development
 - Keep it simple
+- Hammock-driven development
 - posts on architecture
 - Streams
 - The Optional type

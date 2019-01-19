@@ -158,7 +158,7 @@ console.log(transpiledCode); // var test = 1 + 2;
 
 It is possible to pass several options to the `transpileModule` method, including the compiler options to use.
 
-You can also transpile code by invoking the `emit()` method on a Program. If you do this for program created in the most simple way from an actual file on disk, this will put a transpiled .js file next to it. As an example, let's write a piece of TypeScript code that will transpile itself when run.
+You can also transpile code by invoking the `emit()` method on a Program. If you do this for a program created in the most simple way from an actual file on disk, this will put a transpiled .js file next to it. As an example, let's write a piece of TypeScript code that will transpile itself when run.
 
 ```typescript
 // file test.ts
