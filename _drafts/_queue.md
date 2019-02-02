@@ -1,14 +1,17 @@
-- Code review and pairing workflows
 - Trunk-based development
-- Keep it simple
 - Hammock-driven development
-- posts on architecture
-- Streams
-- The Optional type
+- SOLID principles
+- Architecture and boundaries
+- Keep it simple
+- Deployable component coupling, microservices coupling
+- Decoupling from the database
+- Decoupling from libraries and frameworks
+- Decoupling and the frontend
+- Streams and the Optional type
 - The Java platform module system
-- Java date and time API
-- New in Java 10 and 11
-- some basic general posts (sunk cost fallacy, pen and paper as a coding tool)
+- (Java date and time API)
+- (New in Java 10 and 11)
+- Sunk cost fallacy and other cognitive biases
 - posts JavaScript foundations
 - JavaScript concurrency model, Node.js event loop, 
 - parallel JavaScript execution, web workers, Node.js worker threads
