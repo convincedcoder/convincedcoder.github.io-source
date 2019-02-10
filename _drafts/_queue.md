@@ -1,4 +1,6 @@
 - Trunk-based development
+- Feature flags
+- Branch by abstraction
 - Hammock-driven development
 - SOLID principles
 - Architecture and boundaries
@@ -11,7 +13,7 @@
 - The Java platform module system
 - (Java date and time API)
 - (New in Java 10 and 11)
-- Sunk cost fallacy and other cognitive biases
+- Structured, functional and object-oriented programming
 - posts JavaScript foundations
 - JavaScript concurrency model, Node.js event loop, 
 - parallel JavaScript execution, web workers, Node.js worker threads
