@@ -21,9 +21,7 @@ Trunk Based Development is a source-control branching model that limits develope
 
 Perhaps the biggest advantage of trunk-based development is that it limits distances between developers.
 
-In a branching model with long-lived feature branches, one or more developers can work in separation from the rest of the team for days, weeks, or even months. This has the advantage that developers on that feature branch can work on the feature in isolation without continuously having to adjust to changes the rest of the team is making to the codebase. However, it also has the very large *disadvantage* that developers on that feature branch can work on the feature in isolation without continuously having to adjust to changes the rest of the team is making to the codebase.
-
-Being able to work in isolation from the rest of the team can seem like a blessing. However, someday, your code will have to be integrated with the rest of the codebase. The more pain you avoided (or should I say postponed) by choosing not to adjust to changes others were making, the more pain you are saving up until the time has come to merge your feature branch.
+In a branching model with long-lived feature branches, one or more developers can work in separation from the rest of the team for days, weeks, or even months. Being able to work in isolation from the rest of the team can seem like a blessing. However, someday, your code will have to be integrated with the rest of the codebase. The more pain you avoided (or should I say postponed) by choosing not to adjust to changes others were making, the more pain you are saving up until the time has come to merge your feature branch.
 
 Some people have argued that, as version control systems get better and better at merging code, we really shouldn't be afraid of big merges anymore. What they seem to be overlooking is the following:
 
@@ -79,7 +77,9 @@ As it is the team's responsibility to keep the code in the trunk working, team m
 Depending on who you ask, Continuous Integration can mean two things:
 
 - Developers very regularly integrate their changes into a single place where changes from all developers come together, making sure that they are of sufficient quality before doing so. You could argue this was the initially intended meaning of Continuous Integration, and it is more or less the same as the main premise of Trunk Based Development.
-- There is some kind of process that watches the source control repository for changes and runs new commits through the build process (including tests etc.), alerting the team if the build does not pass. This is something very useful to have if practicing Trunk Based Development. If it somehow occurs that the code in the trunk does not build, the team can take action immediately. Note that this should in principle never happen, as developers should run the same build process locally before pushing their code. This kind of automated build is also useful to have on feature branches and can be one of the deciding factors in the decision to merge. For checking commits on feature branches, it is important that the branches are sufficiently up to date with the trunk. This is especially the case right before merging.
+- There is some kind of process that watches the source control repository for changes and runs new commits through the build process (including tests etc.), alerting the team if the build does not pass.
+
+The second meaning is something very useful to have if practicing Trunk Based Development. If it somehow occurs that the code in the trunk does not build, the team can take action immediately. Note that this should in principle never happen, as developers should run the same build process locally before pushing their code. This kind of automated build is also useful to have on feature branches and can be one of the deciding factors in the decision to merge. For checking commits on feature branches, it is important that the branches are sufficiently up to date with the trunk. This is especially the case right before merging.
 
 ## Trunk Based Development and Continuous Delivery
 
@@ -121,27 +121,39 @@ Then, if a fix is needed for the release, a branch is created retroactively from
 
 ## Dealing with larger changes
 
-KEEP IT SIMPLE HERE, FOLLOW-UP POSTS COMING UP
+In principle, every commit in the trunk should be releasable. When introducing new features or performing other large changes, it is often not feasible to make all of the changes in a single commit of reasonable size (and smaller commits are seen as better). Fortunately, there are some strategies that can be used to spread out changes while keeping each commit potentially releasable. There will be some follow-up posts where these are discussed in more detail.
 
 ### Feature flags
 
-https://trunkbaseddevelopment.com/feature-flags/
+Feature flags (also known as feature toggles) are a mechanism to alter system behavior without changing code. They can be thought of as light switches that switch on or switch off some parts of the system. As long as a new feature that is being built is not release ready yet, the feature can be hidden behind a feature flag in a configuration file or command line parameter. Inside the code, there is then some logic that looks at the flag and decides which behavior to enable. This makes it possible to ship the product containing the code for the new feature without the new feature actually being enabled in production. Meanwhile, the development team can enable the feature for testing purposes by switching on the feature flag.
 
-values can be be in code or configuration!
+It is also possible to use feature flags to make an application behave differently for different users, which can be helpful for A/B-testing.
+
+Note that feature flags do introduce some complexity in the codebase. It can also be challenging to ensure that all relevant flag combinations have been tested properly. If possible, prevent the need for feature flags by designing features in such a way that even the earliest work on a feature either already has some value or simply does not change the experience of the user.
 
 ### Branch by Abstraction
 
-https://trunkbaseddevelopment.com/branch-by-abstraction/
+Branch by Abstraction is useful if the team needs to replace a certain component of the system, but this needs to be spread out over multiple commits.
+
+Basically, this is how it works:
+- Write a layer of indirection on top of the component you need to replace
+- Make clients call the indirection instead of the original component
+- Now, use the layer of indirection to switch over to the new component as it is being built. The new layer of indirection could already forward some calls to the new component, or there could be a toggle indicating which component implementation to use.
+- Once the new component is fully built and the layer of indirection doesn't call the old component anymore, get rid of the old component
+- If it makes sense, get rid of the layer of indirection
 
 ### Application strangulation
 
-https://trunkbaseddevelopment.com/strangulation/
+Application strangulation is very similar to Branch by Abstraction, but it works at the level of different applications or processes. An example is the migration of an API to a completely different programming language. You could then put a reverse proxy in front of the old API and have it start forwarding some calls to the new API as that one is being built. Once the new API is fully operational and all calls are routed to it, you can then get rid of the old API and potentially also the reverse proxy.
 
-## Good practices observed in teams applying Trunk Based Development
+## Some good practices observed in teams applying Trunk Based Development
 
-https://trunkbaseddevelopment.com/observed-habits/
-
-- making commits easier to digest for the team: smaller commits, multiple commits per issue, etc.
+- Developers make explicit efforts to get their code reviewed sufficiently before it gets to the trunk
+- Developers pull in changes from the trunk very frequently
+- Developers run the build locally before pushing their code, typically including integration and functional tests talking to real databases etc. This means individual developers must be able to run the application and all its dependencies locally, without depending on shared resources like databases.
+- Developers sometimes chop up their work into multiple smaller commits in order to make their changes easier for their teammates to adjust to. For example, when building a feature entails introducing a new dependency, this dependency could be introduced separately through a new commit that the developer explicitly notifies the team of.
+- Code ownership of is shared across the team
+- Thin Vertical Slices: Stories or tasks from the backlog can ideally be implemented completely by a single developer or pair of developers in a short amount of time and small number of commits. They cut across the whole stack and they do not need to be passed around between developers with specialized knowledge in order to get completed.
 
 ## Resources
 
