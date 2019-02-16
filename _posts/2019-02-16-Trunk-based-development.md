@@ -83,7 +83,7 @@ The second meaning is something very useful to have if practicing Trunk Based De
 
 ## Trunk Based Development and Continuous Delivery
 
-Once a team has set up Continuous Integration (in all senses of the term), it can choose to move on to the next step: *Continuous Delivery*. This means that commits that build successfully are automatically deployed to a quality assurance or acceptance testing environment.
+Once a team has set up Continuous Integration (in every sense of the word), it can choose to move on to the next step: *Continuous Delivery*. This means that commits that build successfully are automatically deployed to a quality assurance or acceptance testing environment.
 
 *Continuous Deployment* takes it a step further: here, commits that build successfully are actually pushed all the way to production. Not that this requires very extensive checking as part of the build process.
 
@@ -146,13 +146,12 @@ Basically, this is how it works:
 
 Application strangulation is very similar to Branch by Abstraction, but it works at the level of different applications or processes. An example is the migration of an API to a completely different programming language. You could then put a reverse proxy in front of the old API and have it start forwarding some calls to the new API as that one is being built. Once the new API is fully operational and all calls are routed to it, you can then get rid of the old API and potentially also the reverse proxy.
 
-## Some good practices observed in teams applying Trunk Based Development
+## Some good practices when applying Trunk Based Development
 
-- Developers make explicit efforts to get their code reviewed sufficiently before it gets to the trunk
-- Developers pull in changes from the trunk very frequently
-- Developers run the build locally before pushing their code, typically including integration and functional tests talking to real databases etc. This means individual developers must be able to run the application and all its dependencies locally, without depending on shared resources like databases.
-- Developers sometimes chop up their work into multiple smaller commits in order to make their changes easier for their teammates to adjust to. For example, when building a feature entails introducing a new dependency, this dependency could be introduced separately through a new commit that the developer explicitly notifies the team of.
-- Code ownership of is shared across the team
+- Quick reviews: Developers try to get their code reviewed as soon as possible.
+- Chasing HEAD: Developers try to stay up to date with changes to the trunk.
+- Shared nothing: Developers run the build locally before pushing their code, typically including integration and functional tests talking to real databases etc. This means individual developers must be able to run the application and all its dependencies locally, without depending on resources shared with others.
+- Facilitating commits: Developers sometimes chop up their work into multiple smaller commits in order to make their changes easier for their teammates to adjust to. For example, when building a feature entails introducing a new dependency, this dependency could be introduced separately through a new commit that the developer explicitly notifies the team of.
 - Thin Vertical Slices: Stories or tasks from the backlog can ideally be implemented completely by a single developer or pair of developers in a short amount of time and small number of commits. They cut across the whole stack and they do not need to be passed around between developers with specialized knowledge in order to get completed.
 
 ## Resources
