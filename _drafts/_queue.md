@@ -1,4 +1,3 @@
-- Trunk-based development
 - Feature flags
 - Branch by abstraction
 - Hammock-driven development
