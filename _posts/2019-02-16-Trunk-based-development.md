@@ -144,7 +144,7 @@ Basically, this is how it works:
 - Make clients call the indirection instead of the original component
 - Now, use the layer of indirection to switch over to the new component as it is being built. The new layer of indirection could already forward some calls to the new component, or there could be a toggle indicating which component implementation to use.
 - Once the new component is fully built and the layer of indirection doesn't call the old component anymore, get rid of the old component
-- If it makes sense, get rid of the layer of indirection
+- Get rid of the layer of indirection
 
 ### Application strangulation
 

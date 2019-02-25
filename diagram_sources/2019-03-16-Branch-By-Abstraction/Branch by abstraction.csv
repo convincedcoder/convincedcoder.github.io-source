@@ -1,0 +1,35 @@
+Id,Name,Shape Library,Page ID,Contained By,Group,Line Source,Line Destination,Source Arrow,Destination Arrow,Text Area 1
+1,Page,,,,,,,,,Page 1
+2,Rectangle,Geometric Shapes,1,,,,,,,Consumer
+3,Rectangle,Geometric Shapes,1,,,,,,,Consumer
+4,Rectangle,Geometric Shapes,1,,,,,,,Old implementation
+5,Rectangle,Geometric Shapes,1,,,,,,,Consumer
+6,Rectangle,Geometric Shapes,1,,,,,,,Consumer
+7,Rectangle,Geometric Shapes,1,,,,,,,Abstraction layer
+8,Rectangle,Geometric Shapes,1,,,,,,,Old implementation
+9,Rectangle,Geometric Shapes,1,,,,,,,Consumer
+10,Rectangle,Geometric Shapes,1,,,,,,,Consumer
+11,Rectangle,Geometric Shapes,1,,,,,,,Abstraction layer
+12,Rectangle,Geometric Shapes,1,,,,,,,Old implementation
+13,Rectangle,Geometric Shapes,1,,,,,,,New implementation
+14,Rectangle,Geometric Shapes,1,,,,,,,Consumer
+15,Rectangle,Geometric Shapes,1,,,,,,,Consumer
+16,Rectangle,Geometric Shapes,1,,,,,,,Abstraction layer
+17,Rectangle,Geometric Shapes,1,,,,,,,New implementation
+18,Rectangle,Geometric Shapes,1,,,,,,,Consumer
+19,Rectangle,Geometric Shapes,1,,,,,,,Consumer
+20,Rectangle,Geometric Shapes,1,,,,,,,New implementation
+21,Line,,1,,,2,4,None,Arrow,
+22,Line,,1,,,3,4,None,Arrow,
+23,Line,,1,,,5,7,None,Arrow,
+24,Line,,1,,,6,7,None,Arrow,
+25,Line,,1,,,7,8,None,Arrow,
+26,Line,,1,,,9,11,None,Arrow,
+27,Line,,1,,,10,11,None,Arrow,
+28,Line,,1,,,11,12,None,Arrow,
+29,Line,,1,,,11,13,None,Arrow,
+30,Line,,1,,,14,16,None,Arrow,
+31,Line,,1,,,15,16,None,Arrow,
+32,Line,,1,,,16,17,None,Arrow,
+33,Line,,1,,,18,20,None,Arrow,
+34,Line,,1,,,19,20,None,Arrow,
