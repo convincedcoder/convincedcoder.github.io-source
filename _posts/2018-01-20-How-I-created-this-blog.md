@@ -71,7 +71,7 @@ The title and tags should be self-explanatory. The layout variable refers to an 
 
 After the YAML front matter, you can use a number of different formats. Markdown is supported out of the box and fits my use case very well, so that is what I decided to use.
 
-If you want to have a look at what the Markdown file for this post looks like, you can find it [here](https://github.com/thehumanmicrophone/thehumanmicrophone.github.io-source/blob/master/_posts/2018-01-20-How-I-created-this-blog.md).
+If you want to have a look at what the Markdown file for this post looks like, you can find it [here](https://github.com/convincedcoder/convincedcoder.github.io-source/blob/master/_posts/2018-01-20-How-I-created-this-blog.md).
 
 ## Running Jekyll locally
 

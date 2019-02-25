@@ -26,7 +26,7 @@ In a branching model with long-lived feature branches, one or more developers ca
 Some people have argued that, as version control systems get better and better at merging code, we really shouldn't be afraid of big merges anymore. What they seem to be overlooking is the following:
 
 - There will alway be cases where source control systems cannot perform the merge automatically. These merge conflicts need to resolve manually, and this becomes more and more difficult as the scope of the merge increases.
-- Even worse than this are the conflicts that your source control system does *not* pick up on. These conflicts are called [semantic conflicts](https://martinfowler.com/bliki/SemanticConflict.html). The merge seems successful, but the code will either fail to compile, fail to run or (most dangerously) succeed to run but produce incorrect results.
+- Even worse than this are the conflicts that your source control system does *not* pick up on. These conflicts are called [semantic conflicts](https://martinfowler.com/bliki/SemanticConflict.html). The merge seems successful, but the code will either fail to compile, fail to run or (most dangerous case) succeed to run but produce incorrect results.
 
 Some examples of semantic conflicts:
 - I rename a method, letting my IDE help me to change its name everywhere it is used. Meanwhile, you create some new code that calls the method (by its old name). Note that this will trigger compiler errors once we merge our code (if using a statically typed language), unless there is now another method with the old name and same signature that does something else than the renamed method (more dangerous).
@@ -44,6 +44,10 @@ The fact that the team strives to keep the code in the trunk working at all time
 - Keeping the code in the trunk working also means there is a strong incentive to set up a good build process that performs as many automated checks as possible to make sure the code actually does work. Developers should also run this build process locally in order to make sure their changes work *before* actually pushing their code.
 
 This part also highlights a possible challenge: Trunk Based Development does require a certain level of dedication to quality from everyone in the team and the team needs to be able to self-police if necessary.
+
+### Flexibility to refactor where needed
+
+In teams where work happens on long-lived feature branches, refactoring could turn an already challenging merge into a complete disaster. The thought of a painful merge can actually keep the team from applying the refactoring that the codebase needs. When practicing Trunk Based Development, the reduced distance between developers makes refactoring a lot easier, meaning that developers are more likely to do it when it makes sense.
 
 ### Flexibility regarding releases
 
