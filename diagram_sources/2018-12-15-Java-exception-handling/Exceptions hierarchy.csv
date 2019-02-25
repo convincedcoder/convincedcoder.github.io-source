@@ -1,0 +1,14 @@
+Id,Name,Shape Library,Page ID,Contained By,Group,Line Source,Line Destination,Source Arrow,Destination Arrow,Text Area 1
+1,Page,,,,,,,,,Page 1
+2,Class,UML,1,,,,,,,Throwable
+3,Class,UML,1,,,,,,,Error
+4,Class,UML,1,,,,,,,Exception
+5,Class,UML,1,,,,,,,RuntimeException
+6,Note,UML,1,,,,,,,Subclasses are unchecked exceptions
+7,Note,UML,1,,,,,,,Subclasses are checked exceptions
+8,Line,,1,,,3,2,None,Hollow Arrow,
+9,Line,,1,,,4,2,None,Hollow Arrow,
+10,Line,,1,,,5,4,None,Hollow Arrow,
+11,Line,,1,,,6,3,None,None,
+12,Line,,1,,,6,5,None,None,
+13,Line,,1,,,4,7,None,None,
