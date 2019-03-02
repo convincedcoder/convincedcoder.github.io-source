@@ -39,7 +39,7 @@ When using a toggle router, the state of the flag could potentially be changed f
 - Incremental releasing: Using feature flags that are toggled on or off dynamically based on the user, it is possible to turn a feature on for a small percentage of the users and monitor its effect before rolling out the feature to all users. This is called a *canary release* or *percentage deploy*. It is essentially a way to test in production, with real user behavior and real data, while limiting risk. There is also a technique called *ring deploys*. The mechanism is the same, but the difference is that the users are not selected randomly but are rather chosen based on risk. You could start with internal users, then add a very small *canary group* of randomly selected real users, then include registered beta testers, etc.
 - A/B testing: When deciding between two approaches (or whether or not to change something or keep it), you can use feature flags to enable approach A for a group of users and approach B for another group of users. Monitoring of the different groups should then help you decide which approach to choose.
 - Kill switches: Feature flags can be used to temporarily switch off resource-heavy features when the system is under heavy load (think of an e-commerce website on Black Friday).
-- Plan management: Some services use feature flags to offer a different feature set to users based on how expensive their subscription is.
+- Plan management: Some services use feature flags to offer a different feature set to different users based on how expensive their subscription is.
 - Incremental infrastructure migrations: Feature flags can be used to perform infrastructure migrations on production in small steps (each toggled by a flag) that can be rolled back if needed by turning off the flag. After each step, the team can verify that the system still works correctly.
 
 ## Categorizing feature flags
@@ -59,6 +59,8 @@ During its lifetime, the same flag could fulfill different kinds of use cases an
 In the different phases of its lifetime, it could also make sense for the flag to be managed by different teams (development team, sales team, ops team, ...).
 
 ## Implementation techniques
+
+### Basic flag check
 
 Let's start from the basic feature flag implementation we saw above:
 
@@ -116,13 +118,13 @@ Sometimes, it makes sense to put toggle points in the core of the system, close 
 
 ## Feature flag configuration
 
-There are several ways of managing feature flag configuration, some allowing for more flexibility than others. That flexibility is especially important for feature flags that needs to be change configuration often or need to be able to change their configuration instantly (for example kill switches). Do note that the fact that a fag is dynamic, in the sense that it has different values for different users, does not necessarily mean that the flag's configuration will change often. For example, the rules for which users see a plan management feature flag as "on" could even be hard-coded.
+There are several ways of managing feature flag configuration, some allowing for more flexibility than others. That flexibility is especially important for feature flags that need to change configuration often or need to be able to change their configuration instantly (for example kill switches). Do note that the fact that a fag is dynamic, in the sense that it has different values for different users, does not necessarily mean that the flag's configuration will change often. For example, the rules for which users see a plan management feature flag as "on" could even be hard-coded.
 
 An overview of some approaches for managing feature flag configuration:
-- Hard-coded or baked in: In this case, the feature flag is toggled on or off by (un)commenting certain lines of code. Some teams may also set the value of the flag as part of the build process. This approach can work for flags guarding unfinished features, where we never want those features to be enabled in production.
-- Command line variables, environment variables or config files: This approach could be useful the value of a flag should be able to change without having to rebuild the application. However, a restart is often needed in order to use the new configuration. With this approach, it may also be challenging to keep flag configuration consistent across multiple server or processes.
+- Hard-coded or baked in: In this case, the feature flag configuration is stored in the actual code. Some teams may also set the value of the flag as part of the build process. This approach can work for flags guarding unfinished features, where we never want those features to be enabled in production.
+- Command line variables, environment variables or config files: This approach could be useful the value of a flag should be able to change without having to rebuild the application. However, a restart is often needed in order to use the new configuration. With this approach, it may also be challenging to keep flag configuration consistent across multiple servers or processes.
 - App database: Storing feature flag configuration in the app database means that there is a single source of truth that is potentially shared across multiple servers. This approach typically also allows the configuration to be changed at runtime, often through some kind of admin UI. There may be some limitations imposed on which users can change the configuration for certain flags.
-- Feature management system: When the (typically home-grown) solution of putting configuration in the app database starts feeling a bit limited or brittle, teams often upgrade to a dedicated system specifically aimed at managing feature flag configuration. They provide a UI for managing the configuration, including limitations on who can change what. There may even be an audit log tracking when changes were made and by who. Often, feature management systems provide mechanisms to ensure that any changes made to the configuration are propagated quickly to all systems that need to know about them. They may also provide tools that help with integrating knowledge about flag configuration and certain application metrics, helping to analyze the effect of turning a certain flag on or of.
+- Feature management system: When the (typically home-grown) solution of putting configuration in the app database starts feeling a bit limited or brittle, teams often upgrade to a dedicated system specifically aimed at managing feature flag configuration. They provide a UI for managing the configuration, including limitations on who can change what. There may even be an audit log tracking when changes were made and by who. Often, feature management systems provide mechanisms to ensure that any changes made to the configuration are propagated quickly to all systems that need to know about them. They may also provide tools that help with integrating knowledge about flag configuration and certain application metrics, helping to analyze the effect of turning a certain flag on or off.
 - Configuration overrides: In some cases, it makes sense to allow feature flag configuration to be overridden, for example by passing a special cookie, query parameter or HTTP header.
 
 Whatever approach to configuration you choose, try to keep a clear separation between feature flag configuration and other kinds of configuration. Additionally, try to include some documentation or metadata (owner, purpose, ...) with the feature flag configuration if your approach allows it.
@@ -155,10 +157,10 @@ If the changes are toggled through a feature flag, things become a bit more chal
 As an example, assume that we currently have a database of orders and that the Order table has some columns storing address information. We now want to start experimenting with a feature that allows customers to explicitly manage their shipping addresses. In a first version, we want to store the shipping addresses a customer has used in the past and present these to the customer when they make an order. This feature needs a situation where we store addresses in an Address table and then refer to the correct address from each Order instead of storing address information in the Order table itself. However, as this feature is behind a flag, we also need to support the old approach. We could make this change in the following way:
 
 1. Perform a database-first change that adds a nullable column to the Order table that references the Address table. The current code will ignore this column.
-2. Change the code so it still fills the old address information columns on Order but also creates Address records and links to them from Order. This concept is called *Duplicate writes*.
+2. Change the code so it still fills the old address information columns on Order but also creates Address records and links to them from Order. This concept is called *Duplicate Writes*.
 3. Perform a one-time data migration, using the existing data in the address information columns to link each Order to an Address. Once this migration is done, the reference from Order to Address can be made non-nullable.
 4. At this point, we can support both states of the feature flag.
-5. Once the feature has been permanently turned on, we can remove the old address information columns from Order (and th code writing to them) as they are not used anymore.
+5. Once the feature has been permanently turned on, we can remove the old address information columns from Order (and the code writing to them) as they are not used anymore.
 
 When performing a complex migration like this, it could be useful to use *Dark Reads*. This means that, when reading data (getting address info for a specific order), you read from both places where the data is available. If the read data is not identical, the team needs to investigate what went wrong.
 
@@ -166,9 +168,9 @@ When performing a complex migration like this, it could be useful to use *Dark R
 
 While feature flags are very powerful, they do come at the cost of additional complexity, testing effort, etc. Therefore, it is wise to limit the number of feature flags in your system. When considering to use a feature flag, remember that there may be other possibilities. Ideally, you could design the feature in such a way that even its first version already has some value or at least has no negative impact on customer experience.
 
-For existing feature flags, it is useful to make sure each flag has an owner who is responsible for making sure the flag is removed at an appropriate time. It can help to add an expiry date to the flag's metadata and to create a backlog issue for removing the flag. Some teams even use the expiry date to create time bombs, making sure tests fail if a flag is still in the system after its expiry date. A team can also put a hard limit on the number of feature flags in the system, requiring an old flag to be removed before adding a new one.
+For existing feature flags, it is useful to make sure each flag has an owner who is responsible for making sure the flag is removed at an appropriate time. It can help to add an expiry date to the flag's metadata and to create a backlog issue for removing the flag. Some teams even use the expiry date to create time bombs, making sure tests fail if a flag is still in the system after its expiry date. A team can also put a hard limit on the number of feature flags in the system, requiring some old flag to be removed before adding a new one.
 
-Some feature management systems can help with the detection of obsolete flags by looking for flags that have been either 100% on or 0% on for a long amount of time.
+Some feature management systems can help with the detection of obsolete flags by looking for flags that have been either 100% on or 100% off for a long amount of time.
 
 ## General best practices
 
