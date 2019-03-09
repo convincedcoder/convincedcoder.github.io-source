@@ -1,11 +1,14 @@
-Blog content (anything under _posts or _drafts) license:
-========================================================
+License for blog content
+(anything under _posts and _drafts unless other source indicated in text,
+anything under images unless the relevant post indicates another source,
+anything under diagram_sources):
+=========================================================================
 
 This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0).
 See https://creativecommons.org/licenses/by-nc-sa/4.0/.
 
-Original template (barryclark/jekyll-now) license:
-==================================================
+License for original template (barryclark/jekyll-now):
+======================================================
 
 The MIT License (MIT)
 

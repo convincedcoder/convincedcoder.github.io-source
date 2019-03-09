@@ -47,8 +47,6 @@ The fact that Jekyll generates your blog as a static website means that you can 
 
 ## Jekyll Now
 
-![Jekyll Now screenshot](/images/2018-01-20-How-I-created-this-blog/jekyll-now-theme-screenshot.jpg)
-
 If you are looking for a quick way to set up a Jekyll blog on GitHub Pages, [Jekyll Now](https://github.com/barryclark/jekyll-now) is an excellent option. It contains all the necessary files to set up a basic Jekyll blog. Just fork the repository according to the instructions and you can immediately start putting your blog posts in the `_posts` directory. You don't even have to install anything on your own machine if you don't want to, as GitHub's online editor has built-in Markdown support.
 
 If you want to modify the look and feel of your blog, you can start modifying `index.html`, `style.scss`, the layouts in the `_layouts` folder and the additional styles in the `_sass` folder.
