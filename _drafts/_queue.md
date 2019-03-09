@@ -1,5 +1,3 @@
-- Feature flags
-- Branch by abstraction
 - Hammock-driven development
 - SOLID principles
 - Architecture and boundaries
