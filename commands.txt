@@ -1,2 +1,5 @@
-serve with autoregeneration: bundle exec jekyll serve
+serve with autoregeneration: 
+
+set JEKYLL_ENV=production
+bundle exec jekyll serve
 
