@@ -99,7 +99,8 @@ exclude:
   - Gemfile.lock
   - LICENSE
   - README.md
-  - CNAME
+  - commands.txt
+  - convincedcoder publish.bat
 
 tag_page_layout: tag_page
 tag_page_dir: tag
