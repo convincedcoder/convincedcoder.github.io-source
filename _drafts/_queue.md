@@ -11,6 +11,8 @@
 - (Java date and time API)
 - (New in Java 10 and 11)
 - Structured, functional and object-oriented programming
+- Dealing with technical debt
+- Picking technologies
 - posts JavaScript foundations
 - JavaScript concurrency model, Node.js event loop, 
 - parallel JavaScript execution, web workers, Node.js worker threads

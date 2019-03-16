@@ -57,9 +57,11 @@ Sometimes, a solution that seemed great when you thought of it doesn't seem so g
 
 ## Bonus: the power of interactions and the outsider effect
 
-When you need to solve a complex problem, you don't need to do it all by yourself. Other people can provide additional input, provide new ideas or offer a different point of view.
+When you need to solve a complex problem, you don't need to do it all by yourself. Other people can provide additional input, generate new ideas or offer a different point of view.
 
-Those other people don't even have to know that much about the problem you are dealing with. Sometimes, just talking to anyone (potentially a rubber duck instead of a person) can help you see the problem in a new way or expose flaws in your current approach. And sometimes, the best ideas for novel approaches come from people who don't have that much relevant knowledge or experience. Exactly because they don't know how this kind of problem is regularly solved, they tend to choose other approaches than the ones that have been tried so far by people who do have relevant knowledge and experience. Thinking outside the box is easy if you don't even know what the box looks like. This is called the "outsider effect". 
+Those other people don't even have to know that much about the problem you are dealing with. Sometimes, just talking to anyone (potentially a rubber duck instead of a person) can help you see the problem in a new light or expose flaws in your current approach. And sometimes, the best ideas for novel approaches come from people who don't have that much relevant knowledge or experience. Exactly because they don't know how this kind of problem is regularly solved, they tend to choose other approaches than the ones that have been tried so far by people who do have relevant knowledge and experience. Thinking outside the box is easy if you don't even know what the box looks like. This is called the "outsider effect". 
+
+If you find yourself stuck on a problem, any kind of interaction with others has a great potential for getting you unstuck. Use this to your advantage.
 
 ## Resources
 
