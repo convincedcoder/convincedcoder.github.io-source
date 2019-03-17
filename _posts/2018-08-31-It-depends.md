@@ -1,7 +1,7 @@
 ---
 layout: post
 title: It depends - the best answer to most software development questions
-tags: software-development
+tags: general
 toc: true
 ---
 

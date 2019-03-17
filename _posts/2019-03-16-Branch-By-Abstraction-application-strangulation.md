@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Branch By Abstraction and application strangulation
-tags: software-development
+tags: general
 toc: true
 ---
 

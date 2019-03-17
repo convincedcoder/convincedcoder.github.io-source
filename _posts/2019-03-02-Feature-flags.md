@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Feature flags
-tags: software-development
+tags: general
 toc: true
 ---
 

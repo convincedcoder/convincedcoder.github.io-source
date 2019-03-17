@@ -1,7 +1,7 @@
 ---
 layout: post
 title: SOLID principles
-tags: software-architecture
+tags: software-design
 toc: true
 ---
 
