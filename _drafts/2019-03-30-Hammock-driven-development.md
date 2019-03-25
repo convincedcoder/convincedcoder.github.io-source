@@ -7,6 +7,10 @@ toc: true
 
 Sometimes, the best thing you can do for your code is to stop thinking about it - at least consciously.
 
+## Programming, creativity and the hammock
+
+In essence, programming is problem solving and problem solving requires creativity. This post presents some results from the research on creativity, specifically regarding the interaction between your conscious and subconscious mind, and applies them to programming and to problem solving in general. In doing this, we use some ideas from Rich Hickey's talk [Hammock Driven Development](https://www.youtube.com/watch?v=f84n5oFoZBc). Although Rich declared that his talk was based on experience rather than science, the advice he gives lines up well with what we learn from the actual research.
+
 ## The conscious and subconscious mind
 
 Research has shown that different parts of our brain work differently, are triggered at different times and and are good at different kinds of things. When solving a problem (which is what software development essentially boils down to), it can help to combine the efforts of different parts of your brain and let them help each other solve the problem at hand.
@@ -43,7 +47,7 @@ After all of this hard work, it is time to stop the left side of your brain from
 
 One way to achieve this is to work your conscious brain to the point of frustration, until it actually gives up on finding any solution at all. With your conscious brain out of the way, your subconscious is free the tackle the problem. When you get frustrated, the subconscious brain sometimes takes over very quickly, providing you with a great solution almost immediately after you've given up. Probably, this means the hard work you did and the frustration you felt put the problem at the top of your subconscious mind's to-do list.
 
-A more pleasant way to stop consciously thinking about a problem is to do something relaxing. You can go for a walk or a bike ride. You can take a nice bath or shower. Ideally, try to do something that keeps your conscious mind occupied (preventing it from thinking about your problem) but doesn't use up all of your brain's resources. Driving can help, especially if you know the way and there is not too much traffic. Even doing mundane stuff like going to the toilet or brushing your teeth can sometimes trigger an epiphany. And, finally, sleeping on it for one or more nights can also help. 
+A more pleasant way to stop consciously thinking about a problem is to do something relaxing. You can go lie in a hammock. You can go for a walk or a bike ride. You can take a nice bath or shower. Ideally, try to do something that keeps your conscious mind occupied (preventing it from thinking about your problem) but doesn't use up all of your brain's resources. Research has shown that these kinds of undemanding tasks are very good at triggering your subconscious mind. Driving can help, especially if you know the way and there is not too much traffic. Even doing mundane stuff like folding laundry, going to the toilet or brushing your teeth can sometimes trigger an epiphany. And, finally, sleeping on it for one or more nights can also help. 
 
 ## Processing the results
 
@@ -67,3 +71,4 @@ If you find yourself stuck on a problem, any kind of interaction with others has
 
 - [Hammock Driven Development - Rich Hickey](https://www.youtube.com/watch?v=f84n5oFoZBc) ([transcript](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/HammockDrivenDev.md))
 - Imagine: How Creativity Works (book by Jonah Lehrer) ([summary](http://newbooksinbrief.com/2012/04/29/12-a-summary-of-imagine-how-creativity-works-by-jonah-lehrer/))
+- [Inspired by Distraction: Mind Wandering Facilitates Creative Incubation](https://journals.sagepub.com/doi/abs/10.1177/0956797612446024)
