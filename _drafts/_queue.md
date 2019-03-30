@@ -1,11 +1,9 @@
-- Hammock-driven development
 - SOLID principles
 - Architecture and boundaries
+- Layered architecture and Clean Architecture
+- Deployable components, microservices and coupling
+- Decoupling in monoliths through encapsulation
 - Keep it simple
-- Deployable component coupling, microservices coupling
-- Decoupling from the database
-- Decoupling from libraries and frameworks
-- Decoupling and the frontend
 - Streams and the Optional type
 - The Java platform module system
 - (Java date and time API)
