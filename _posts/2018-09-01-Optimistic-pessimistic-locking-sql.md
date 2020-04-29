@@ -3,6 +3,8 @@ layout: post
 title: Optimistic and pessimistic locking with SQL
 tags: concurrency sql
 toc: true
+new_url: /data/sql/optimistic-pessimistic-locking-sql/
+new_title: Optimistic and pessimistic locking in SQL
 ---
 
 This post explains the optimistic and pessimistic locking strategies with a focus on their application in systems interacting with relational databases. Regardless of the focus on SQL, the main concepts discussed here are not SQL-specific and are also applicable in other areas.

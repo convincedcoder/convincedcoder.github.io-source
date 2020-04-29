@@ -44,6 +44,10 @@
 
 		<div id="notice" class="container" style="background: #d28445; padding: 1em; border-radius: 0.5em; color: white;">
 			<p>This blog is no longer being maintained. Most of the content has been migrated to the new website at <a href="https://learning-notes.mistermicheels.com" style="color: inherit; font-weight: bold;">learning-notes.mistermicheels.com</a>.</p>
+			
+			{% if page.new_url and page.new_title %}
+				<p>New version of this post: <a href="https://learning-notes.mistermicheels.com{{ page.new_url }}" style="color: inherit; font-weight: bold;">{{ page.new_title }}</a>.</p>
+			{% endif %}
 		</div>
 
 		<div id="main" role="main" class="container">

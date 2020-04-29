@@ -3,6 +3,8 @@ layout: post
 title: Java overloading, overriding and method hiding
 tags: java
 toc: true
+new_url: /java/overloading-overriding-method-hiding/
+new_title: Overloading, overriding and method hiding (Java)
 ---
 
 This is a post about the way Java determines the exact method to call for a method invocation, which can sometimes seem confusing at first.

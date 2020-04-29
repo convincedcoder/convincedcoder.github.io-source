@@ -3,6 +3,8 @@ layout: post
 title: Exception handling best practices in Java
 tags: java
 toc: true
+new_url: /java/exceptions/
+new_title: Exceptions (Java)
 ---
 
 This post explains some best practices for exception handling in Java. Although the post focuses on Java, some general ideas can be applied to other languages as well.

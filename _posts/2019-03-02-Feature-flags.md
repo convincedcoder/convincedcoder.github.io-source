@@ -3,6 +3,8 @@ layout: post
 title: Feature flags
 tags: general
 toc: true
+new_url: /processes-techniques/feature-flags/
+new_title: Feature flags
 ---
 
 Feature flags are a way to build flexibility into your codebase, allowing some features or alternate code paths to be toggled on or off at will. This post explains a bit more about what they are and how to use them.

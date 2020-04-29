@@ -3,6 +3,8 @@ layout: post
 title: Branch By Abstraction and application strangulation
 tags: general
 toc: true
+new_url: /processes-techniques/branch-by-abstraction-application-strangulation/
+new_title: Branch By Abstraction and application strangulation
 ---
 
 Branch By Abstraction is a development technique that allows teams to make large changes while collaborating in a single branch and without breaking the system while the change is in progress. It is an alternative to long-lived feature branches. This post will also talk about application strangulation, which is a similar technique that works at a higher level.

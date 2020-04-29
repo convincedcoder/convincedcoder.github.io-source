@@ -3,6 +3,8 @@ layout: post
 title: Hammock-driven development
 tags: general
 toc: true
+new_url: /mindset/hammock-driven-development/
+new_title: Hammock-driven development
 ---
 
 Sometimes, the best thing you can do for your code is to stop thinking about it - at least consciously.

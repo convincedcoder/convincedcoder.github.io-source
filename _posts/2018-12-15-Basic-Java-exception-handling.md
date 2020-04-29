@@ -3,6 +3,8 @@ layout: post
 title: Basic Java exception handling
 tags: java
 toc: true
+new_url: /java/exceptions/
+new_title: Exceptions (Java)
 ---
 
 Almost every program will need some kind of error handling for when things go wrong, either because of incorrect code or because of things that the code has no control over (e.g., network errors). This post explains the tools Java provides you for handling errors.

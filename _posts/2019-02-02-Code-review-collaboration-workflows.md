@@ -3,6 +3,8 @@ layout: post
 title: Code review and collaboration workflows
 tags: general
 toc: true
+new_url: /processes-techniques/code-review-collaboration/
+new_title: Code review and collaboration workflows
 ---
 
 When writing code alone, it is sometimes easy to make mistakes or forget to take something into account. Therefore, the quality of your code as a team can greatly improve if developers collaborate on writing code. This post talks about some ways to handle code review and collaboration when writing code in a team.

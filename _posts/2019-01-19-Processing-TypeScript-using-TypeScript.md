@@ -3,6 +3,8 @@ layout: post
 title: Processing TypeScript using TypeScript
 tags: typescript javascript
 toc: true
+new_url: /javascript/typescript/compiler-api/
+new_title: Compiler API (TypeScript)
 ---
 
 One of the interesting things about TypeScript is that it exposes a compiler API that you can use to process TypeScript code programmatically, from your own TypeScript code. This post will give you some idea of how this can be done and why it can be useful.

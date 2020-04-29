@@ -3,6 +3,8 @@ layout: post
 title: Lambda expressions in Java
 tags: java
 toc: true
+new_url: /java/lambda-expressions/
+new_title: Lambda expressions (Java)
 ---
 
 In this post, we cover the lambda expressions which were added to the Java language in version 8.

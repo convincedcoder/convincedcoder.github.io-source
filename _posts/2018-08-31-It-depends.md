@@ -3,6 +3,8 @@ layout: post
 title: It depends - the best answer to most software development questions
 tags: general
 toc: true
+new_url: /mindset/it-depends/
+new_title: It depends
 ---
 
 I think I have finally discovered the best answer to most software development questions. It goes like this: *"It depends"*.

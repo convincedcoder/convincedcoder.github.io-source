@@ -3,6 +3,8 @@ layout: post
 title: Writing an equals method - how hard can it be?
 tags: java
 toc: true
+new_url: /java/equals/
+new_title: Equals (Java)
 ---
 
 If you've ever had to write or test an `equals` method, you may have gotten a feel for how complex this can get. This post will explain a number of things that can go wrong, offer solutions, and explain how a library called [EqualsVerifier](http://jqno.nl/equalsverifier/) can help you prevent unexpected behavior regarding object equality testing.

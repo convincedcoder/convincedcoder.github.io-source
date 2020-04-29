@@ -3,6 +3,8 @@ layout: post
 title: Modern Java interfaces
 tags: java
 toc: true
+new_url: /java/interfaces/
+new_title: Interfaces (Java)
 ---
 
 This post is a review of interfaces in Java, including modern interfaces in Java 8 and later.

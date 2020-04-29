@@ -3,6 +3,8 @@ layout: post
 title: Runtime type checking for TypeScript applications
 tags: typescript javascript
 toc: true
+new_url: /javascript/typescript/runtime-type-checking/
+new_title: Runtime type checking in TypeScript
 ---
 
 This post will discuss some possibilities for adding runtime type checking to TypeScript applications.

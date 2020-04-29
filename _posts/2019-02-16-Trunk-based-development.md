@@ -3,6 +3,8 @@ layout: post
 title: Trunk Based Development
 tags: general
 toc: true
+new_url: /processes-techniques/trunk-based-development/
+new_title: Trunk Based Development
 ---
 
 Trunk Based Development is a source-control branching model that limits developer collaboration to a single branch, the "trunk". This can feel quite restrictive, but it can actually help teams increase the quality of their code base and their ease of deployment. This post aims to give a high-level overview of what practicing Trunk Based Development looks like.

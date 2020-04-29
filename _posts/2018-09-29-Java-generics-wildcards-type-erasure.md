@@ -3,6 +3,8 @@ layout: post
 title: Java generics, wildcards and type erasure
 tags: java
 toc: true
+new_url: /java/generics/
+new_title: Generics (Java)
 ---
 
 This post contains a high-level review of Java generics.
